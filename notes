@@ -1,0 +1,181 @@
+
+common approaches:
+ - type distance
+ - semantic functionality distance
+ - semantic importance distance / very primitive developer need measurement
+ - syntactic distance
+
+
+ - author vs. maintainer vs. reviewer vs. contributor ...
+ - density / levels of distinction / 
+
+
+
+create monotone bases
++----------+---------------------+-------------------+
+| name     | light-scheme        | dark-scheme       |
++----------+---------------------+-------------------+
+| light_3  | background          |                   |-\
+| light_2  | background-emph     |                   |  |
+| light_1  | content-minor       | content-emph      |  |-----
+| light_0  |                     | content           |--|\
+| dark__0  | content             |                   |-/  |
+| dark__1  | content-emph        | content-minor     |    |---
+| dark__2  |                     | background-emph   |    |
+| dark__3  |                     | background        |---/
+
+
+===============================================================================
+
+* Embedded lang1
+* Embedded lang2
+
+
+
+----------------------+-----------------+----------+---------+--------
+(Name/Desc)           | vim             | pygments | perldoc | emacs
+----------------------+-----------------+----------+---------+--------
+     NORMAL TEXT      |                 |          |         |
+bareword              | Normal          | --       | w       | type-face
+non text              | NonText         | --       | --      |
+text.whitespace       | --              | w        | --      |
+generic.deleted       | --              | gd       | --      |
+generic.emph          | --              | ge       | --      |
+generic.error         | --              | gr       | --      |
+generic.heading       | --              | gh       | --      |
+generic.inserted      | --              | gi       | --      |
+generic.output        | --              | go       | --      |
+generic.prompt        | --              | gp       | --      |
+generic.strong        | --              | gs       | --      |
+generic.subheading    | --              | gu       | --      |
+generic.traceback     | --              | gt       | --      |
+----------------------+-----------------+----------+---------+-------------------
+     DESCRIPTIVE      |                 |          |         |
+comment               | *Comment        | c        | c       | comment-face
+comment.multiline     | --              | cm       | --      |
+comment.single        | --              | c1       | --      |
+comment.special       | --              | cs       | --      |
+special comment       | SpecialComment  | --       | --      |
+ignore/invisible      | *Ignore         | --       | --      |
+todo                  | *Todo           | --       | --      |
+literal.string.doc    | --              | sd       | --      | doc-string-face
+v-string              | --              | --       | v       |
+----------------------+-----------------+----------+---------+
+
+keyword.constant      | *Constant       | kc       | --      | constant-face
+name.constant         | --              | no       | --      |
+literal.string        | String          | s        | --      | string-face
+pod text              | --              | --       | pd      |
+literal.str.heredoc   | --              | sh       | hh      |
+heredoc target        | --              | --       | h       |
+literal.string.dblq   | --              | s2       | --      |
+literal.string.sq     | --              | s1       | --      |
+literal.str.backtick  | --              | sb       | --      |
+literal.str.interpol  | --              | si       | --      |
+literal.str.other     | --              | sx       | --      |
+literal.str.regex     | --              | sr       | --      |
+literal.string.char   | Character       | sc       | --      |
+literal.number        | Number          | m        | n       |
+literal.boolean       | Boolean         | --       | --      |
+literal.number.float  | Float           | mf       | --      |
+literal.number.hex    | --              | mh       | --      |
+literal.number.oct    | --              | mo       | --      |
+literal.number.integer| --              | mi       | --      |
+literal.num.int.long  | --              | il       | --      |
+                      | 
+name.variable         | *Identifier     | nv       | i       | variable-name-face
+name.variable.class   | --              | vc       | --      |
+name.variable.global  | --              | vg       | --      |
+name.variable.instance| --              | vi       | --      |
+name.function         | Function        | nf       | --      | function-name-face
+subroutine            | --              | --       | m       |
+support function      | --              | supportf.| --      |
+name.attribute        | --              | na       | --      |
+name.builtin          | --              | nb       | --      | builtin-face
+name.builtin.pseudo   | --              | bp       | --      |
+keyword.declaration   | *Statement      | kd       | --      |
+conditional           | Conditional     | --       | --      |
+repeat                | Repeat          | --       | --      |
+label/string.symbol   | Label           | ss       | j       |
+operator              | Operator        | o        | --      |
+operator.word         | --              | ow       | --      |
+name.decorator        | --              | nd       | --      |
+keyword               | Keyword         | k        | k       | keyword-face
+keyword.namespace     | --              | kn       | --      |
+name.namespace        | --              | nn       | --      |
+keyword.pseudo        | --              | kp       | --      |
+keyword.reserved      | --              | kr       | --      |
+preprocessor stmt     | *PreProc        | cp       | --      |
+include/require       | Include         | --       | --      |
+                      | Define
+                      | Macro
+                      | PreCondit
+                      | 
+keyword.type          | *Type           | kt       | --      |
+name.class            |  StorageClass   | nc       | --      |
+structure             |  Structure      |          | s
+                      |  Typedef
+                      | --
+                      | *Special
+literal.string.escape |  SpecialChar    | se       | --      |
+name.tag              |  Tag            | nt       | --      |
+punctuation/delim     |  Delimiter      |          | pu
+comma                 | --              |          | cm
+colon                 | --              |          | co
+semicolon             | --              |          | sc
+paren                 | --              |          | p
+matching paren        | MatchParen      |          |
+quote                 | --              |          | q
+caret                 | --              | caret    |
+debug statement       |  Debug
+                      | 
+underlined            | *Underlined
+                      | 
+                      | 
+error                 | *Error          | err      | --      |
+name.exception        |  Exception      | ne       | --      |
+                      | 
+                      |
+selection             | Visual          | selection| --      | region
+cursor                | Cursor          |          |
+cursor line           | CursorLine      |          |
+cursor column         | CursorColumn    |          |
+p menu (?)            | Pmenu           |          |
+pmenu Selection       | PmenuSel        |          |
+line numbers          | LineNr          |          |
+statusline            | StatusLine      |          |         | mode-line
+statusline nc (?)     | StatusLineNC    |          |
+verticalsplit         | VertSplit       |          |
+fold                  | Folded          |          |
+title                 | Title           |          |
+special key           | SpecialKey      |          |
+diff change           | DiffChange
+diff add              | DiffAdd
+diff text             | DiffText
+diff delete           | DiffDelete
+tab line fill         | TabLineFill
+tab line selection    | TabLineSel
+
+                      
+
+| fg | bg | txt                                        | examples
+-----------------------------------------------------------------
+| 16 | 16 | bold/underline/blink/invisible             | 
+| 88 | 88 | bold/underline/blink/invisible
+256
+
+
+
+
+
+
+background color luminance probability
+|
+|
+|--          --
+|  \        /
+|   \      /
+|    \    /
++--------------
+drk        lght
+
