@@ -32,38 +32,37 @@ create monotone bases
 
 
 
-----------------------+-----------------+----------+---------+--------
-(Name/Desc)           | vim             | pygments | perldoc | emacs
-----------------------+-----------------+----------+---------+--------
-     NORMAL TEXT      |                 |          |         |
-bareword              | Normal          | --       | w       | type-face
-non text              | NonText         | --       | --      |
-text.whitespace       | --              | w        | --      |
-generic.deleted       | --              | gd       | --      |
-generic.emph          | --              | ge       | --      |
-generic.error         | --              | gr       | --      |
-generic.heading       | --              | gh       | --      |
-generic.inserted      | --              | gi       | --      |
-generic.output        | --              | go       | --      |
-generic.prompt        | --              | gp       | --      |
-generic.strong        | --              | gs       | --      |
-generic.subheading    | --              | gu       | --      |
-generic.traceback     | --              | gt       | --      |
-----------------------+-----------------+----------+---------+-------------------
-     DESCRIPTIVE      |                 |          |         |
-comment               | *Comment        | c        | c       | comment-face
-comment.multiline     | --              | cm       | --      |
-comment.single        | --              | c1       | --      |
-comment.special       | --              | cs       | --      |
-special comment       | SpecialComment  | --       | --      |
-ignore/invisible      | *Ignore         | --       | --      |
-todo                  | *Todo           | --       | --      |
-literal.string.doc    | --              | sd       | --      | doc-string-face
-v-string              | --              | --       | v       |
-----------------------+-----------------+----------+---------+
-
-keyword.constant      | *Constant       | kc       | --      | constant-face
-name.constant         | --              | no       | --      |
+----------------------+-----------------+----------+---------+---------------------------+------------
+(Name/Desc)           | vim             | pygments | perldoc | emacs                     | textmate
+----------------------+-----------------+----------+---------+---------------------------+-----------
+     NORMAL TEXT      |                 |          |         | --                        |
+bareword              | Normal          | --       | w       | --                        |
+non text              | NonText         | --       | --      | --                        |
+text.whitespace       | --              | w        | --      | --                        |
+generic.deleted       | --              | gd       | --      | --                        |
+generic.emph          | --              | ge       | --      | --                        |
+generic.error         | --              | gr       | --      | --                        |
+generic.heading       | --              | gh       | --      | --                        |
+generic.inserted      | --              | gi       | --      | --                        |
+generic.output        | --              | go       | --      | --                        |
+generic.prompt        | --              | gp       | --      | --                        |
+generic.strong        | --              | gs       | --      | --                        |
+generic.subheading    | --              | gu       | --      | --                        |
+generic.traceback     | --              | gt       | --      | --                        |
+----------------------+-----------------+----------+---------+---------------------------+
+     DESCRIPTIVE      |                 |          |         | --                        |
+comment               | *Comment        | c        | c       | comment-face              | comment
+comment.multiline     | --              | cm       | --      | --                        | comment.block
+comment.single        | --              | c1       | --      | --                        | comment.line(...)
+comment.special       | --              | cs       | --      | --                        |
+comment delimiter     | --              | --       | --      | comment-delimiter-face    |
+special comment       | SpecialComment  | --       | --      | --                        |
+ignore/invisible      | *Ignore         | --       | --      | --                        |
+todo                  | *Todo           | --       | --      | --                        |
+literal.string.doc    | --              | sd       | --      | doc-face, doc-string-face | comment.block.documentation
+v-string              | --              | --       | v       | --                        |
+----------------------+-----------------+----------+---------+---------------------------|
+     STRING CONSTANTS |                 |          |         |                           |
 literal.string        | String          | s        | --      | string-face
 pod text              | --              | --       | pd      |
 literal.str.heredoc   | --              | sh       | hh      |
@@ -74,7 +73,12 @@ literal.str.backtick  | --              | sb       | --      |
 literal.str.interpol  | --              | si       | --      |
 literal.str.other     | --              | sx       | --      |
 literal.str.regex     | --              | sr       | --      |
-literal.string.char   | Character       | sc       | --      |
+literal.string.char   | Character       | sc       | --      |                           | constant.character
+literal.string.escape | SpecialChar     | se       | --      |                           | constant.character.escape
+quote                 | --              |          | q
+
+keyword.constant      | *Constant       | kc       | --      | constant-face
+name.constant         | --              | no       | --      |
 literal.number        | Number          | m        | n       |
 literal.boolean       | Boolean         | --       | --      |
 literal.number.float  | Float           | mf       | --      |
@@ -84,6 +88,7 @@ literal.number.integer| --              | mi       | --      |
 literal.num.int.long  | --              | il       | --      |
                       | 
 name.variable         | *Identifier     | nv       | i       | variable-name-face
+reference             | --              | --       | --      | reference-face
 name.variable.class   | --              | vc       | --      |
 name.variable.global  | --              | vg       | --      |
 name.variable.instance| --              | vi       | --      |
@@ -105,19 +110,18 @@ keyword.namespace     | --              | kn       | --      |
 name.namespace        | --              | nn       | --      |
 keyword.pseudo        | --              | kp       | --      |
 keyword.reserved      | --              | kr       | --      |
-preprocessor stmt     | *PreProc        | cp       | --      |
+preprocessor stmt     | *PreProc        | cp       | --      | preprocessor-face
 include/require       | Include         | --       | --      |
                       | Define
                       | Macro
                       | PreCondit
                       | 
-keyword.type          | *Type           | kt       | --      |
+keyword.type          | *Type           | kt       | --      | type-face
 name.class            |  StorageClass   | nc       | --      |
 structure             |  Structure      |          | s
                       |  Typedef
                       | --
                       | *Special
-literal.string.escape |  SpecialChar    | se       | --      |
 name.tag              |  Tag            | nt       | --      |
 punctuation/delim     |  Delimiter      |          | pu
 comma                 | --              |          | cm
@@ -125,15 +129,16 @@ colon                 | --              |          | co
 semicolon             | --              |          | sc
 paren                 | --              |          | p
 matching paren        | MatchParen      |          |
-quote                 | --              |          | q
 caret                 | --              | caret    |
+negation chars        | --              | --       | --      | negation-char-face
 debug statement       |  Debug
                       | 
 underlined            | *Underlined
                       | 
                       | 
-error                 | *Error          | err      | --      |
-name.exception        |  Exception      | ne       | --      |
+warnings              | --              | --       | --      | warning-face
+error                 | *Error          | err      | --      | c-invalid-face
+name.exception        | Exception       | ne       | --      |
                       | 
                       |
 selection             | Visual          | selection| --      | region
@@ -157,6 +162,14 @@ tab line fill         | TabLineFill
 tab line selection    | TabLineSel
 
                       
+More:
+textmate (finish)   http://manual.macromates.com/en/language_grammars#naming_conventions.html
+notepad++           http://panofish.net/pics/userDefineLang.xml
+SED                 http://www.opserver.de/ubb7/ubbthreads.php?ubb=showflat&Number=224571
+Visual Studio       http://www.opserver.de/ubb7/ubbthreads.php?ubb=showflat&Number=224571
+eclipse             http://eclipsecolorthemes.jottit.com/
+redcar              (Uses textmate themes)
+JEdit, Kate/KWrite  https://github.com/sickill/coloration/
 
 | fg | bg | txt                                        | examples
 -----------------------------------------------------------------
