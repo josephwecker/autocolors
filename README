@@ -1,8 +1,7 @@
-Principles
-==========
+Automatically create well-balanced colorschemes
 
-* Palettes for mono -> 8 -> 16 -> 80 -> 255 -> ffffff
-* Schemes for
+* Palettes for  ( mono / 16 / 256 / ffffff )
+* Outputs for
   - terminal emulators
   - terminal programs (email readers etc.)
   - editors
