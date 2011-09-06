@@ -32,6 +32,61 @@ create monotone bases
 
 
 
+palette
+      clear/bold/faint/under/blink/reverse/conceal
+fg|bg|
+
++-----------+--------------+--------+-----------------------
+| version   |   palette    | styles | comments
++-----------+--------------+--------+-----------------------
+| mono      | 2/2/7        | 
+
+
+
+Terminal support for some ansi styling- from http://perldoc.perl.org/Term/ANSIColor.html , which
+gives credit to Jean Delvare.
++--------------+----------+---------+----------+----------+-------------+------------+------------+
+|              | clear    | bold    | faint    | under    | blink       | reverse    | conceal    |
++--------------+----------+---------+----------+----------+-------------+------------+------------+
+| xterm        | yes      | yes     | no       | yes      | yes         | yes        | yes        |
+| linux        | yes      | yes     | yes      | bold     | yes         | yes        | no         |
+| rxvt         | yes      | yes     | no       | yes      | bold/black  | yes        | no         |
+| dtterm       | yes      | yes     | yes      | yes      | reverse     | yes        | yes        |
+| teraterm     | yes      | reverse | no       | yes      | rev/red     | yes        | no         |
+| aixterm      | kinda    | normal  | no       | yes      | no          | yes        | yes        |
+| PuTTY        | yes      | color   | no       | yes      | no          | yes        | no         |
+| Windows      | yes      | no      | no       | no       | no          | yes        | no         |
+| Cygwin SSH   | yes      | yes     | no       | color    | color       | color      | yes        |
+| Mac Terminal | yes      | yes     | no       | yes      | yes         | yes        | yes        |
+
+"Windows is Windows telnet, Cygwin SSH is the OpenSSH implementation under
+Cygwin on Windows NT, and Mac Terminal is the Terminal application in Mac OS X.
+Where the entry is other than yes or no, that emulator displays the given
+attribute as something else instead. Note that on an aixterm, clear doesn't
+reset colors; you have to explicitly set the colors back to what you want. More
+entries in this table are welcome.
+
+Note that codes 3 (italic), 6 (rapid blink), and 9 (strike-through) are
+specified in ANSI X3.64 and ECMA-048 but are not commonly supported by most
+displays and emulators and therefore aren't supported by this module at the
+present time. ECMA-048 also specifies a large number of other attributes,
+including a sequence of attributes for font changes, Fraktur characters,
+double-underlining, framing, circling, and overlining. As none of these
+attributes are widely supported or useful, they also aren't currently supported
+by this module."
+
+vim support for term:
+		bold
+		underline
+		undercurl	not always available (usually avail in gui for mispells etc.)
+		reverse
+		inverse		same as reverse
+		italic
+		standout
+		NONE		no attributes used (used to reset it)
+
+
+
 ----------------------+-----------------+----------+---------+---------------------------+------------
 (Name/Desc)           | vim             | pygments | perldoc | emacs                     | textmate
 ----------------------+-----------------+----------+---------+---------------------------+-----------
