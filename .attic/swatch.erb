@@ -1,0 +1,39 @@
+        <style type="text/css">
+            div {
+                padding: 30px;
+            }
+            p {
+                font-family: Helvetica;
+                font-size: 22pt;
+            }
+            .rgb-color<%= ctx %> {
+                color: <%= rgb %>;
+                text-decoration: underline;
+            }
+            .rgb-bcolor<%= ctx %> {
+                background-color: <%= rgb %>;
+                width: 70px;
+                height: 70px;
+            }
+            .light { background-color: #fff; }
+            .dark { background-color: 0; }
+            <% nextcolors.each_with_index do |n,i| %>
+            .bcolor<%= ctx %>-<%= i %> { background-color: <%= n[0] %>; }
+            .color<%= ctx %>-<%= i %> { color: <%= n[0] %>; }
+            <% end %>
+        </style>
+        <!--<div class="rgb-color">&nbsp;</div>-->
+        <div class="light">
+            <p class="rgb-color<%= ctx %>">The context of the text is this... (0123) [<%= rgb %>]</p>
+            <% nextcolors.each_with_index do |n,i| %>
+                <!--<div class="color<%= i %>">&nbsp;</div>-->
+                <p class="color<%= ctx %>-<%= i %>">The context of the text is this... (0123) [<%= n[0] %> | <%= n[1] %>]</p>
+            <% end %>
+        </div>
+        <div class="dark">
+            <p class="rgb-color<%= ctx %>">The context of the text is this... (0123) [<%= rgb %>]</p>
+            <% nextcolors.each_with_index do |n,i| %>
+                <!--<div class="color<%= i %>">&nbsp;</div>-->
+                <p class="color<%= ctx %>-<%= i %>">The context of the text is this... (0123) [<%= n[0] %> | <%= n[1] %>]</p>
+            <% end %>
+        </div>
