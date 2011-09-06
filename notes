@@ -8,7 +8,16 @@ common approaches:
 
  - author vs. maintainer vs. reviewer vs. contributor ...
  - density / levels of distinction / 
+ - structural vs. contextual (likelihood that, for example, you'll find it at the
+   beginning of a line with aligned indentation)
+ - discriminant vs. qualifier/attribute (the first- unique names- being more important to stand out)
 
+
+static function blahblah
+^      ^        ^
+|      |        +- discriminant
+|      +---------- structural
++----------------- qualifier/attribute
 
 
 create monotone bases
@@ -58,6 +67,7 @@ gives credit to Jean Delvare.
 | Windows      | yes      | no      | no       | no       | no          | yes        | no         |
 | Cygwin SSH   | yes      | yes     | no       | color    | color       | color      | yes        |
 | Mac Terminal | yes      | yes     | no       | yes      | yes         | yes        | yes        |
+| gvim         | "NONE"   | bold    | italic   | underline| standout    | rev/inv    | ?          |
 
 "Windows is Windows telnet, Cygwin SSH is the OpenSSH implementation under
 Cygwin on Windows NT, and Mac Terminal is the Terminal application in Mac OS X.
@@ -246,4 +256,71 @@ background color luminance probability
 |    \    /
 +--------------
 drk        lght
+
+
+
+
+
+
+#   | part              | textmate                   | vim                 | emacs
+----+-------------------+----------------------------+---------------------+------------------------------
+0a  | text (normal)     | entity/markup              | Normal/NonText      | face (?)
+0b  | invalid           | invalid                    | Error               | warning-face/c-invalid-face
+
+1   | comment           | comment                    | Comment             | comment-face
+2   | string            | string                     | String              | string-face
+3   | keyword           | keyword                    | Statement/Keyword   | keyword-face/builtin-face
+4   | preprocessor      | comment.block.preprocessor | PreProc             | preprocessor-face
+5   | variable          | variable                   | Identifier          | variable-name-face
+6   | function          | entity                     | Identifier/Function | function-name-face
+7   | constant          | constant                   | Constant            | constant-face
+8   | type              | storage                    | Type                | type-face
+
+0c  | ui-component      | (n/a)                      | (lots)              | region/mode-line
+
+
+textmate: support
+vim: Ignore, Todo, Special
+emacs: doc-face/doc-string-face, reference-face, negation-char-face
+
+
+===== Color -> Monochrome/Term ======
+
+More diff + much lower CR  ^  conceal
+     less diff + lower CR  |  faint/italic
+                     base  o  clear/NONE
+                Less diff  |  bold
+                           |  underline
+                           |  reverse/inverse
+                More diff  v  standout/blink
+
+
+
+Syntax richness | Color richness
+
+base            | mono
+base            | 16
+base            | 256
+base            | high
+
+high            | mono
+high            | 16
+high            | 256
+high            | high
+
+
+
+
+base background - somewhat near black or white
+base foreground - somewhat near a 16-color value
+
+core-8          - somewhat near main 8-color values, for 1-8 syntax parts
+core-
+
+
+a hilight-section for each of t_Co in 8 / 16 / 88 / 256 / gui
+
+hi Normal / and then
+hi MainPart   term=... cterm=... gui=...    ctermfg=... ctermbg=... guifg=... guibg=...
+
 
