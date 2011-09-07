@@ -142,6 +142,14 @@ class Color
   end
   alias :- :color_diff
 
+  def to_s
+    '#' + r_str + g_str + b_str
+  end
+
+  def r_str; r.to_s(16).rjust(2,'0') end
+  def g_str; g.to_s(16).rjust(2,'0') end
+  def b_str; b.to_s(16).rjust(2,'0') end
+
   protected
 
   def init_string(s)

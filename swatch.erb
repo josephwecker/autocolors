@@ -1,0 +1,14 @@
+<style type="text/css">
+    div { padding: 30px; margin: 30px;}
+    p { font-family: Helvetica; font-size: 22pt; }
+</style>
+<% schemes.each do |cscheme| %>
+<style type="text/css">
+    .scheme-<%= cscheme.name %> {
+        background-color: <%= cscheme.dark_bg %>;
+        color: white;
+    }
+</style>
+<div class="scheme-<%= cscheme.name %>">[<%= cscheme.dark_bg %>] <%= cscheme.name %></div>
+<% end %>
+
