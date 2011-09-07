@@ -18,7 +18,6 @@ class ColorScheme
     @dark_bg = nrandcolor(0x090909)
   end
 
-
   protected
 
   def nrandcolor(mean=nil)

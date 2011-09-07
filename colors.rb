@@ -111,6 +111,7 @@ class Color
     ((r * 299.0) + (g * 587.0) + (b * 114.0)) / 1000.0
   end
 
+
   # http://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
   # No contrast:   1.0
   # Good contrast: 5.0
@@ -170,4 +171,39 @@ class Color
   def init_integer(i) init_string('#'+i.to_s(16).rjust(6,'0')) end
 
   def sRGB() [@r,@g,@b].map{|c| c.to_f / 255.0} end
+end
+
+require 'matrix'
+# http://cs.haifa.ac.il/hagit/courses/ist/Lectures/Demos/ColorApplet2/t_convert.html
+# http://en.wikipedia.org/wiki/SRGB_color_space
+# http://en.wikipedia.org/wiki/Lab_color_space
+module Colors
+  class RGB
+    attr_accessor :r,:g,:b
+    def initialize(rgb)
+
+      def to_a; [@r,@g,@b] end
+      def vals; to_a end
+    end
+  end
+
+  class XYZ
+    attr_accessor :x,:y,:z
+    RGB2XYZ = Matrix[[0.412453,0.357580,0.180423],[0.212671,0.715160,0.072169],[0.019334,0.119193,0.950227]]
+    XYZ2RGB = Matrix[[3.240479,-1.537150,-0.498535],[-0.969256,1.875992,0.041556],[0.055648,-0.204043,1.057311]]
+    def self.from_xyz(xyz) XYZ.new(xyz) end
+    def self.from_rgb(rgb) n=normrgb(rgb); XYZ.new(RGB2XYZ*Matrix[[n[0]],[n[1]],[n[2]]]) end
+    def initialize(xyz) @x,@y,@z = xyz.to_a end
+    def to_rgb; (XYZ2RGB*Matrix[[@x],[@y],[@z]]).each.map{|v|v<0?0:(v>255?255:v)}.map{|v|v.round} end
+    def to_a; [@x,@y,@z] end
+    def vals; to_a end
+  end
+
+  #class Lab
+  #  attr_accessor :l,:a,:b
+  #  def self.from_rgb(r,g,b) xyz = XYZ.from_rgb(r,g,b); Lab.from_xyz(xyz.x,xyz.y,xyz.z) end
+  #  def self.from_xyz(x,y,z)
+
+  #  end
+  #end
 end
