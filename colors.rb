@@ -213,12 +213,15 @@ module Colors
   LRGB2XYZ = Matrix[[0.4124,0.3576,0.1805],[0.2126,0.7152,0.0722],[0.0193,0.1192,0.9505]]
   XYZ2LRGB = Matrix[[3.2406,-1.5372,-0.4986],[-0.9689,1.8758,0.0415],[0.0557,-0.2040,1.0570]]
   class Color
+    attr_reader :rgb_approx
+
     def initialize(rgb)
       @r,@g,@b = rgb
       @lab_dirty = false
       @rgb_dirty = true
     end
 
+    # Intermediate spaces
     def lr; rgb_propagate if @rgb_dirty; lab_propagate if @lab_dirty; @lr end
     def lg; rgb_propagate if @rgb_dirty; lab_propagate if @lab_dirty; @lg end
     def lb; rgb_propagate if @rgb_dirty; lab_propagate if @lab_dirty; @lb end
@@ -226,6 +229,7 @@ module Colors
     def y; rgb_propagate if @rgb_dirty; lab_propagate if @lab_dirty; @y end
     def z; rgb_propagate if @rgb_dirty; lab_propagate if @lab_dirty; @z end
 
+    # CIELAB colorspace
     def lab;    rgb_propagate if @rgb_dirty; [@cl,@ca,@cb] end
     def cl;     rgb_propagate if @rgb_dirty; @cl           end
     def ca;     rgb_propagate if @rgb_dirty; @ca           end
@@ -235,6 +239,7 @@ module Colors
     def ca=(v)  @lab_dirty=true; @ca=v         end
     def cb=(v)  @lab_dirty=true; @cb=v         end
 
+    # RGB colorspace
     def rgb;    lab_propagate if @lab_dirty; [@r,@g,@b] end
     def r;      lab_propagate if @lab_dirty; @r         end
     def g;      lab_propagate if @lab_dirty; @g         end
@@ -246,6 +251,13 @@ module Colors
 
     def to_s
       '#' + rgb.map{|v|v.to_s(16).rjust(2,'0')}.join('')
+    end
+
+    def -(c)
+      if c.is_a?(Color)
+        # Euclidean distance in 3 dimensions
+        ((cl - c.cl)**2 + (ca - c.ca)**2 + (cb - c.cb)**2)**0.5
+      end
     end
 
     protected
@@ -265,6 +277,7 @@ module Colors
       @y = p ** 3.0
       @z = (p - @cb / 200.0) ** 3.0
       @lr,@lg,@lb = (XYZ2LRGB*Matrix[[@x],[@y],[@z]]).to_a.flatten
+      @rgb_approx = false
       @r,@g,@b = [@lr,@lg,@lb].map{|c|lrgbc_to_rgbc(c)}
       @lab_dirty = false
     end
@@ -275,23 +288,16 @@ module Colors
 
     # http://en.wikipedia.org/wiki/SRGB_color_space
     def rgbc_to_lrgbc(c)
-      #c.to_f / 255.0
       cf = c.to_f / 255.0
       if cf <= 0.04045 then cf / 12.92
       else ((cf + 0.055) / 1.055) ** 2.4 end
     end
 
     def lrgbc_to_rgbc(c)
-      #v = (c * 255.0).round
-      #if v < 0 then 0
-      #elsif v > 255 then 255
-      #else v end
-      #
       if c <= 0.0031308 then v = (12.92 * c * 255.0).round
       else v = ((1.055 * (c ** (1.0/2.4)) - 0.055) * 255.0).round end
-
-      if v < 0 then 0
-      elsif v > 255 then 255
+      if v < 0 then @rgb_approx = true; 0
+      elsif v > 255 then @rgb_approx = true; 255
       else v end
     end
   end
