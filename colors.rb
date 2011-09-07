@@ -175,7 +175,6 @@ end
 
 require 'matrix'
 # http://cs.haifa.ac.il/hagit/courses/ist/Lectures/Demos/ColorApplet2/t_convert.html
-# http://en.wikipedia.org/wiki/SRGB_color_space
 # http://en.wikipedia.org/wiki/Lab_color_space
 module Colors
   class RGB
@@ -197,6 +196,7 @@ module Colors
     def to_rgb; (XYZ2RGB*Matrix[[@x],[@y],[@z]]).each.map{|v|v<0?0:(v>255?255:v)}.map{|v|v.round} end
     def to_a; [@x,@y,@z] end
     def vals; to_a end
+    def self.normrgb(rgb) rgb end
   end
 
   #class Lab
@@ -207,3 +207,96 @@ module Colors
   #  end
   #end
 end
+
+
+module Colors
+  LRGB2XYZ = Matrix[[0.4124,0.3576,0.1805],[0.2126,0.7152,0.0722],[0.0193,0.1192,0.9505]]
+  XYZ2LRGB = Matrix[[3.2406,-1.5372,-0.4986],[-0.9689,1.8758,0.0415],[0.0557,-0.2040,1.0570]]
+  class Color
+    def initialize(rgb)
+      @r,@g,@b = rgb
+      @lab_dirty = false
+      @rgb_dirty = true
+    end
+
+    def lr; rgb_propagate if @rgb_dirty; lab_propagate if @lab_dirty; @lr end
+    def lg; rgb_propagate if @rgb_dirty; lab_propagate if @lab_dirty; @lg end
+    def lb; rgb_propagate if @rgb_dirty; lab_propagate if @lab_dirty; @lb end
+    def x; rgb_propagate if @rgb_dirty; lab_propagate if @lab_dirty; @x end
+    def y; rgb_propagate if @rgb_dirty; lab_propagate if @lab_dirty; @y end
+    def z; rgb_propagate if @rgb_dirty; lab_propagate if @lab_dirty; @z end
+
+    def lab;    rgb_propagate if @rgb_dirty; [@cl,@ca,@cb] end
+    def cl;     rgb_propagate if @rgb_dirty; @cl           end
+    def ca;     rgb_propagate if @rgb_dirty; @ca           end
+    def cb;     rgb_propagate if @rgb_dirty; @cb           end
+    def lab=(v) @lab_dirty=true; @cl,@ca,@cb=v end
+    def cl=(v)  @lab_dirty=true; @cl=v         end
+    def ca=(v)  @lab_dirty=true; @ca=v         end
+    def cb=(v)  @lab_dirty=true; @cb=v         end
+
+    def rgb;    lab_propagate if @lab_dirty; [@r,@g,@b] end
+    def r;      lab_propagate if @lab_dirty; @r         end
+    def g;      lab_propagate if @lab_dirty; @g         end
+    def b;      lab_propagate if @lab_dirty; @b         end
+    def rgb=(v) @rgb_dirty=true; @r,@g,@b=v end
+    def r=(v)   @rgb_dirty=true; @r=v       end
+    def g=(v)   @rgb_dirty=true; @g=v       end
+    def b=(v)   @rgb_dirty=true; @b=v       end
+
+    def to_s
+      '#' + rgb.map{|v|v.to_s(16).rjust(2,'0')}.join('')
+    end
+
+    protected
+
+    def rgb_propagate
+      @lr,@lg,@lb = [@r,@g,@b].map{|c|rgbc_to_lrgbc(c)}
+      @x,@y,@z = (LRGB2XYZ*Matrix[[@lr],[@lg],[@lb]]).to_a.flatten
+      @cl = (@y > 0.008856) ? 116.0*(@y ** (1.0/3.0)) - 16.0 : 903.3 * @y
+      @ca = 500.0 * (labf(@x) - labf(@y))
+      @cb = 200.0 * (labf(@y) - labf(@z))
+      @rgb_dirty = false
+    end
+
+    def lab_propagate
+      p = (@cl + 16.0) / 116.0
+      @x = (p + @ca / 500.0) ** 3.0
+      @y = p ** 3.0
+      @z = (p - @cb / 200.0) ** 3.0
+      @lr,@lg,@lb = (XYZ2LRGB*Matrix[[@x],[@y],[@z]]).to_a.flatten
+      @r,@g,@b = [@lr,@lg,@lb].map{|c|lrgbc_to_rgbc(c)}
+      @lab_dirty = false
+    end
+
+    def labf(t)
+      t > 0.008856 ? t**(1.0/3.0) : 7.787 * t + (16.0/116.0)
+    end
+
+    # http://en.wikipedia.org/wiki/SRGB_color_space
+    def rgbc_to_lrgbc(c)
+      #c.to_f / 255.0
+      cf = c.to_f / 255.0
+      if cf <= 0.04045 then cf / 12.92
+      else ((cf + 0.055) / 1.055) ** 2.4 end
+    end
+
+    def lrgbc_to_rgbc(c)
+      #v = (c * 255.0).round
+      #if v < 0 then 0
+      #elsif v > 255 then 255
+      #else v end
+      #
+      if c <= 0.0031308 then v = (12.92 * c * 255.0).round
+      else v = ((1.055 * (c ** (1.0/2.4)) - 0.055) * 255.0).round end
+
+      if v < 0 then 0
+      elsif v > 255 then 255
+      else v end
+    end
+  end
+end
+
+
+
+
