@@ -284,6 +284,18 @@ vim: Ignore, Todo, Special
 emacs: doc-face/doc-string-face, reference-face, negation-char-face
 
 
+1 -> 25%
+2 -> 40%-60%
+3 -> 40%-60%
+4 -> 40%-60%
+5 -> 40%-60%
+6 -> 40%-60%
+7 -> 40%-60%
+8 -> 40%-60%
+
+0b-> 40%-60%
+0a-> 50%
+
 ===== Color -> Monochrome/Term ======
 
 More diff + much lower CR  ^  conceal
