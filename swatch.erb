@@ -5,10 +5,15 @@
 <% schemes.each do |cscheme| %>
 <style type="text/css">
     .scheme-<%= cscheme.name %> {
-        background-color: <%= cscheme.dark_bg %>;
-        color: white;
+        background-color: <%= cscheme[:normal][:bg][:light] %>;
+        color: <%= cscheme[:normal][:fg][:light] %>;
+    }
+    .dscheme-<%= cscheme.name %> {
+        background-color: <%= cscheme[:normal][:bg][:dark] %>;
+        color: <%= cscheme[:normal][:fg][:dark] %>;
     }
 </style>
-<div class="scheme-<%= cscheme.name %>">[<%= cscheme.dark_bg %>] <%= cscheme.name %></div>
+<div class="scheme-<%= cscheme.name %>">[<%= cscheme[:normal][:bg][:light] %>] <%= cscheme.name %></div>
+<div class="dscheme-<%= cscheme.name %>">[<%= cscheme[:normal][:fg][:light] %>] <%= cscheme.name %></div>
 <% end %>
 
