@@ -9,10 +9,16 @@ module Colors
   class Color
     attr_reader :rgb_approx
 
-    def initialize(rgb)
-      @r,@g,@b = rgb
-      @lab_dirty = false
-      @rgb_dirty = true
+    def initialize(lab,rgb=nil)
+      if rgb.nil?
+        @cl,@ca,@cb = lab.map{|v| v.to_f}
+        @lab_dirty = true
+        @rgb_dirty = false
+      else
+        @r,@g,@b = rgb.map{|v| v.to_f}
+        @lab_dirty = false
+        @rgb_dirty = true
+      end
     end
 
     # Intermediate spaces
@@ -24,24 +30,24 @@ module Colors
     def z; rgb_propagate if @rgb_dirty; lab_propagate if @lab_dirty; @z end
 
     # CIELAB colorspace
-    def lab;    rgb_propagate if @rgb_dirty; [@cl,@ca,@cb] end
-    def cl;     rgb_propagate if @rgb_dirty; @cl           end
-    def ca;     rgb_propagate if @rgb_dirty; @ca           end
-    def cb;     rgb_propagate if @rgb_dirty; @cb           end
-    def lab=(v) @lab_dirty=true; @cl,@ca,@cb=v end
-    def cl=(v)  @lab_dirty=true; @cl=v         end
-    def ca=(v)  @lab_dirty=true; @ca=v         end
-    def cb=(v)  @lab_dirty=true; @cb=v         end
+    def lab;    rgb_propagate if @rgb_dirty; [@cl,@ca,@cb]    end
+    def cl;     rgb_propagate if @rgb_dirty; @cl              end
+    def ca;     rgb_propagate if @rgb_dirty; @ca              end
+    def cb;     rgb_propagate if @rgb_dirty; @cb              end
+    def lab=(v) @lab_dirty=true; @cl,@ca,@cb=v.map{|a|a.to_f} end
+    def cl=(v)  @lab_dirty=true; @cl=v.to_f                   end
+    def ca=(v)  @lab_dirty=true; @ca=v.to_f                   end
+    def cb=(v)  @lab_dirty=true; @cb=v.to_f                   end
 
     # RGB colorspace
-    def rgb;    lab_propagate if @lab_dirty; [@r,@g,@b] end
-    def r;      lab_propagate if @lab_dirty; @r         end
-    def g;      lab_propagate if @lab_dirty; @g         end
-    def b;      lab_propagate if @lab_dirty; @b         end
-    def rgb=(v) @rgb_dirty=true; @r,@g,@b=v end
-    def r=(v)   @rgb_dirty=true; @r=v       end
-    def g=(v)   @rgb_dirty=true; @g=v       end
-    def b=(v)   @rgb_dirty=true; @b=v       end
+    def rgb;    lab_propagate if @lab_dirty; [@r,@g,@b]       end
+    def r;      lab_propagate if @lab_dirty; @r               end
+    def g;      lab_propagate if @lab_dirty; @g               end
+    def b;      lab_propagate if @lab_dirty; @b               end
+    def rgb=(v) @rgb_dirty=true; @r,@g,@b=v.map{|a|a.to_f}    end
+    def r=(v)   @rgb_dirty=true; @r=v.to_f                    end
+    def g=(v)   @rgb_dirty=true; @g=v.to_f                    end
+    def b=(v)   @rgb_dirty=true; @b=v.to_f                    end
 
     def to_s
       '#' + rgb.map{|v|v.to_s(16).rjust(2,'0')}.join('')
