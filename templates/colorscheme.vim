@@ -9,13 +9,11 @@ let g:colors_name = expand('<sfile>:t:r')
 set background&
 
 if has("gui_running") || &t_Co > 16
-  if &background == "light"
-    <% parts = {'term'  => colors[:base][:mono].base.style,
-                'cterm' => colors[:base][:256].base.style,
-                'gui'   => colors[:high].base.style,
-                'ctermbg' => colors[:256].base.
-    hi Normal term=<%= colors[:mono].base.style %> cterm=<%= colors[256].base.style %> gui=<%= colors[:high].base.style %>
-    hi Normal ctermbg=<%= colors[256].base.bg %> ctermfg=<%= colors[256].base.fg %> guibg=<%= colors[:high].base.bg %> guifg
+ if &background == "light"
+  <% c = scheme[:light] %>
+  hi Normal term=<%=c[:normal][:fg].s_term%> cterm=<%=c[:normal][:fg].s_cterm%> gui=<%=c[:normal][:fg].s_high%>
+  hi Normal ctermbg=<%=c[:normal][:bg].cterm%> 
+  hi Normal ctermbg=<%= colors[256].base.bg %> ctermfg=<%= colors[256].base.fg %> guibg=<%= colors[:high].base.bg %> guifg
   else
 
   endif

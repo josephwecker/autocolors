@@ -7,13 +7,16 @@ class DeepHash < Hash
     self[key] = DeepHash.new unless has_key?(key)
     super(key)
   end
+
+  def nil?; return (super || keys.size == 0) end
 end
 
 class ColorScheme
   attr_accessor :name, :contrast, :saturation
 
   def initialize(name=nil)
-    @colors = DeepHash.new
+    @lights = DeepHash.new
+    @darks  = DeepHash.new
     srand rand(0xffffffff)
     name ||= Webster.new.random_word
     @name = name
@@ -22,9 +25,15 @@ class ColorScheme
     generate
   end
 
-  def [](key) @colors[key] end
-
-  def []=(key,val) @colors[key] = val end
+  def [](key)
+    if key == :dark
+      @darks
+    elsif key == :light
+      @lights
+    else
+      raise ArgumentError, 'only :dark or :light as first key'
+    end
+  end
 
   protected
   LOW3  = 0; LOW2  = 1; LOW1  = 2; NORML = 3; NORMH = 4; HIGH1 = 5; HIGH2 = 6; HIGH3 = 7
@@ -41,22 +50,26 @@ class ColorScheme
     @base_a = nrand(0.0, 40.0, -120.0, 120.0)
     @base_b = nrand(0.0, 40.0, -120.0, 120.0)
 
-    @colors[:normal][:bg] = lab(LOW3, LOW2 )
-    @colors[:normal][:fg] = lab(HIGH1,NORML)
+    map_color [:normal, :bg], LOW3,  LOW2
+    map_color [:normal, :fg], HIGH1, NORML
+    #@colors[:normal][:bg] = lab(LOW3, LOW2 )
+    #@colors[:normal][:fg] = lab(HIGH1,NORML)
   end
 
   def dark_i(idx) idx end
   def light_i(idx) 7 - idx end
 
-  def lab(intensity,saturation,a=@base_a,b=@base_b)
-    ival = light_i(intensity)
-    lightc = Colors::Color.new([@intensity[ival], a * @fcolor[saturation], b * @fcolor[saturation]])
-    ival = dark_i(intensity)
-    darkc = Colors::Color.new([@intensity[ival], a * @fcolor[saturation], b * @fcolor[saturation]])
-    res = DeepHash.new
-    res[:light] = lightc
-    res[:dark] = darkc
-    return res
+  def map_color(mapping, intensity, saturation, a=@base_a, b=@base_b, styles=[])
+    loc = @lights
+    mapping[0..-2].each{|m| loc = loc[m]}
+    loc[mapping.last] = lab(light_i(intensity),saturation,a,b)
+    loc = @darks
+    mapping[0..-2].each{|m| loc = loc[m]}
+    loc[mapping.last] = lab(dark_i(intensity),saturation,a,b)
+  end
+
+  def lab(intensity, saturation, a, b)
+    Colors::Color.new([@intensity[intensity], a * @fcolor[saturation], b * @fcolor[saturation]])
   end
 
   def nrand(mean=0, stddev=nil, floor=nil, ceil=nil)
