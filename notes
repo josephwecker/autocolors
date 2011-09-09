@@ -95,55 +95,25 @@ vim support for term:
 		standout
 		NONE		no attributes used (used to reset it)
 
-
+Normal:    N
+Bold:      B
+Underline: U
+Italic:    I
+Strike:    X
+Invis:     V
+Reverse:   R
+Standout:  A
 
 ----------------------+-----------------+----------+---------+---------------------------+------------
 (Name/Desc)           | vim             | pygments | perldoc | emacs                     | textmate
 ----------------------+-----------------+----------+---------+---------------------------+-----------
-     NORMAL TEXT      |                 |          |         | --                        |
-bareword              | Normal          | --       | w       | --                        |
-non text              | NonText         | --       | --      | --                        |
-text.whitespace       | --              | w        | --      | --                        |
-generic.deleted       | --              | gd       | --      | --                        |
-generic.emph          | --              | ge       | --      | --                        |
-generic.error         | --              | gr       | --      | --                        |
-generic.heading       | --              | gh       | --      | --                        |
-generic.inserted      | --              | gi       | --      | --                        |
-generic.output        | --              | go       | --      | --                        |
-generic.prompt        | --              | gp       | --      | --                        |
-generic.strong        | --              | gs       | --      | --                        |
-generic.subheading    | --              | gu       | --      | --                        |
-generic.traceback     | --              | gt       | --      | --                        |
-----------------------+-----------------+----------+---------+---------------------------+
-     DESCRIPTIVE      |                 |          |         | --                        |
-comment               | *Comment        | c        | c       | comment-face              | comment
-comment.multiline     | --              | cm       | --      | --                        | comment.block
-comment.single        | --              | c1       | --      | --                        | comment.line(...)
-comment.special       | --              | cs       | --      | --                        |
-comment delimiter     | --              | --       | --      | comment-delimiter-face    |
-special comment       | SpecialComment  | --       | --      | --                        |
-ignore/invisible      | *Ignore         | --       | --      | --                        |
-todo                  | *Todo           | --       | --      | --                        |
-literal.string.doc    | --              | sd       | --      | doc-face, doc-string-face | comment.block.documentation
-v-string              | --              | --       | v       | --                        |
-----------------------+-----------------+----------+---------+---------------------------|
-     STRING CONSTANTS |                 |          |         |                           |
-literal.string        | String          | s        | --      | string-face
-pod text              | --              | --       | pd      |
-literal.str.heredoc   | --              | sh       | hh      |
-heredoc target        | --              | --       | h       |
-literal.string.dblq   | --              | s2       | --      |
-literal.string.sq     | --              | s1       | --      |
-literal.str.backtick  | --              | sb       | --      |
-literal.str.interpol  | --              | si       | --      |
-literal.str.other     | --              | sx       | --      |
-literal.str.regex     | --              | sr       | --      |
-literal.string.char   | Character       | sc       | --      |                           | constant.character
-literal.string.escape | SpecialChar     | se       | --      |                           | constant.character.escape
 quote                 | --              |          | q
+
+delims.heredoc target | --              | --       | h       |
 
 keyword.constant      | *Constant       | kc       | --      | constant-face
 name.constant         | --              | no       | --      |
+
 literal.number        | Number          | m        | n       |
 literal.boolean       | Boolean         | --       | --      |
 literal.number.float  | Float           | mf       | --      |
@@ -225,6 +195,7 @@ diff text             | DiffText
 diff delete           | DiffDelete
 tab line fill         | TabLineFill
 tab line selection    | TabLineSel
+generic.prompt        | --              | gp       | --      | --                        |
 
                       
 More:

@@ -38,6 +38,13 @@ class ColorScheme
   protected
   LOW3  = 0; LOW2  = 1; LOW1  = 2; NORML = 3; NORMH = 4; HIGH1 = 5; HIGH2 = 6; HIGH3 = 7
 
+  AUX = [:string,:keyword,:preprocessor,:variable,:function,:constant,:type,:invalid]
+  AUX_CH = {
+    :comment => [],
+    :delimiter => [],
+    :string => [:pod_text,:heredoc,:heredoc_target,:single_quote,:double_quote,:backtick,:interpolated,:regex,:other,:character,:escape],
+    
+
   def generate
     bc = nrand(-1,2,-4,5)
     sat = rand * 2.0
@@ -51,7 +58,18 @@ class ColorScheme
     @base_b = nrand(0.0, 40.0, -120.0, 120.0)
 
     map_color [:normal, :bg], LOW3,  LOW2
+    map_color [:comment, :bg], LOW3, LOW2
+
     map_color [:normal, :fg], HIGH1, NORML
+    map_color [:comment, :fg], LOW2, LOW2
+
+    @aux = AUX.inject({}){|h,name| h[name] = [rand_color, rand_color]; h}
+    @aux.each do |name, colors|
+      a,b = colors
+      map_color [name, :bg], LOW3, LOW2, a, b
+      map_color [name, :fg], NORMH, NORMH, a, b
+    end
+
     #@colors[:normal][:bg] = lab(LOW3, LOW2 )
     #@colors[:normal][:fg] = lab(HIGH1,NORML)
   end
@@ -71,6 +89,8 @@ class ColorScheme
   def lab(intensity, saturation, a, b)
     Colors::Color.new([@intensity[intensity], a * @fcolor[saturation], b * @fcolor[saturation]])
   end
+
+  def rand_color; nrand(0.0, 40.0, -120.0, 120.0) end
 
   def nrand(mean=0, stddev=nil, floor=nil, ceil=nil)
     theta = 2 * Math::PI * rand
@@ -94,7 +114,8 @@ class ColorScheme
   end
 end
 
-schemes = (0..100).map{ColorScheme.new}.sort_by{|c|c.contrast}
+#schemes = (0..100).map{ColorScheme.new}.sort_by{|c|c.contrast}
+scheme = ColorScheme.new
 require 'erb'
-template = ERB.new(IO.read('swatch.erb'))
+template = ERB.new(IO.read('templates/colorscheme.vim'),nil,'-')
 puts template.result(binding)

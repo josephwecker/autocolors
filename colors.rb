@@ -131,8 +131,29 @@ module Colors
             CUBE256_GRAYS.map{|rgb| Colors::Color.new(rgb)}
 
   class Color
-    def nearest_256
-      CUBE256.map{|c| [c,c - self]}.sort_by{|c,d| d}
+    def to_256
+      CUBE256.each_with_index.map{|c,i| [i,c-self]}.sort_by{|i,diff| diff}.first[0]
+      #CUBE256.sort_by{|c| c - self}.first
+    end
+
+    def to_16
+      CUBE256[0..15].each_with_index.map{|c,i| [i,c-self]}.sort_by{|i,diff| diff}.first[0]
+    end
+
+    def s_term
+      'NONE'
+    end
+
+    def s_lcterm
+      'NONE'
+    end
+
+    def s_cterm
+      'NONE'
+    end
+
+    def s_high
+      'NONE'
     end
   end
 end

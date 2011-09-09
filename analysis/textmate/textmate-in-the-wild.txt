@@ -1,0 +1,586 @@
+# Generated with:
+# grep -A1 'scope</key>' /Applications/TextMate.app/Contents/SharedSupport/Themes/* \
+#    | egrep -o '<string>([^<]+)' | cut -d\> -f2 | tr ',' "\n" | sed 's/^ *//' | sort | uniq
+
+0comment
+comment
+comment -comment.line
+comment punctuation
+comment.block
+comment.line
+comment.other.server-side-include.html
+comment.other.server-side-include.xhtml
+constant
+constant.block
+constant.character
+constant.character.escape
+constant.language
+constant.language.boolean
+constant.language.pseudo-variable
+constant.name
+constant.numeric
+constant.numeric.floating-point
+constant.numeric.floating-point.ocaml
+constant.numeric.integer.int32
+constant.numeric.integer.int64
+constant.numeric.integer.nativeint
+constant.other
+constant.other.java
+constant.other.placeholder.py
+constant.other.rgb-value.css
+constant.other.unit
+declaration.class
+declaration.class class-inheritance
+declaration.class class-name
+declaration.function
+declaration.function argument-name
+declaration.function function-arg-type
+declaration.function function-argument
+declaration.function function-name
+declaration.function function-result
+declaration.function.operator
+declaration.module
+declaration.section entity.name.section
+declaration.section section-name
+declaration.tag
+declaration.tag entity
+declaration.tag.inline
+declaration.tag.inline entity
+embedded
+entity
+entity.name
+entity.name.class
+entity.name.class.variant
+entity.name.function
+entity.name.function.frame
+entity.name.function.non-terminal
+entity.name.function.non-terminal.reference
+entity.name.instance
+entity.name.module
+entity.name.preprocessor
+entity.name.reference
+entity.name.section
+entity.name.tag
+entity.name.tag.css
+entity.name.tag.namespace
+entity.name.tag.script
+entity.name.tag.style
+entity.name.tag.wildcard
+entity.name.type
+entity.name.type.class
+entity.name.type.class-type
+entity.name.type.class.type
+entity.name.type.instance
+entity.name.type.module
+entity.name.type.module-type.ocaml
+entity.name.type.token
+entity.name.type.token.reference
+entity.name.type.variant
+entity.name.type.variant.polymorphic
+entity.other.attribute-name
+entity.other.attribute-name.class.css
+entity.other.attribute-name.id.css
+entity.other.attribute-name.namespace
+entity.other.attribute-name.pseudo-class
+entity.other.attribute-name.pseudo-class.css
+entity.other.attribute-name.pseudo-element
+entity.other.attribute-name.tag.pseudo-class
+entity.other.attribute-name.universal
+entity.other.django.tagbraces
+entity.other.inherited-class
+invalid
+invalid -invalid.SOMETHING
+invalid.SOMETHING
+invalid.bad-comma.css
+invalid.deprecated
+invalid.deprecated.trailing-whitespace
+invalid.illegal
+keyword
+keyword - keyword.operator
+keyword.control
+keyword.control.import
+keyword.exception
+keyword.markup.attribute-name
+keyword.markup.element-name
+keyword.operator
+keyword.operator.arithmetic
+keyword.operator.assignment
+keyword.operator.comparison
+keyword.operator.infix.floating-point.ocaml
+keyword.operator.js
+keyword.operator.logical
+keyword.operator.prefix.floating-point.ocaml
+keyword.other
+keyword.other.decorator
+keyword.other.directive
+keyword.other.directive.line-number
+keyword.other.include.php
+keyword.other.name-of-parameter.objc
+keyword.other.phpdoc.php
+keyword.other.special-method
+keyword.other.unit
+keyword.other.unit.css
+keyword.storage.php
+keyword.type.variant
+markup comment
+markup markup -(markup meta.paragraph.list)
+markup.bold
+markup.changed
+markup.deleted
+markup.heading
+markup.heading entity
+markup.heading | markup.heading entity.name
+markup.hr
+markup.inserted
+markup.italic
+markup.link
+markup.list
+markup.list meta.paragraph
+markup.quote
+markup.quote markup.quote
+markup.raw
+markup.raw.block
+markup.underline
+markup.underline.link
+meta.assertion
+meta.attribute-match.css
+meta.attribute-with-value
+meta.begin-document.latex support.function
+meta.begin-document.latex variable.parameter
+meta.block.content.slate 
+meta.block.slate
+meta.block.slate meta.block.slate
+meta.block.slate meta.block.slate meta.block.slate 
+meta.block.slate meta.block.slate meta.block.slate meta.block.slate 
+meta.block.slate meta.block.slate meta.block.slate meta.block.slate meta.block.slate 
+meta.block.slate meta.block.slate meta.block.slate meta.block.slate meta.block.slate meta.block.slate 
+meta.block.slate meta.block.slate meta.block.slate meta.block.slate meta.block.slate meta.block.slate meta.block.slate 
+meta.block.slate meta.block.slate meta.block.slate meta.block.slate meta.block.slate meta.block.slate meta.block.slate meta.block.slate 
+meta.block.slate meta.block.slate meta.block.slate meta.block.slate meta.block.slate meta.block.slate meta.block.slate meta.block.slate meta.block.slate 
+meta.brace.curly
+meta.brace.curly meta.group
+meta.brace.curly meta.group.css
+meta.brace.curly.function
+meta.brace.erb
+meta.brace.erb.html
+meta.brace.erb.return-value
+meta.brace.pipe
+meta.brace.round
+meta.brace.square
+meta.cast
+meta.class -meta.class.instance
+meta.class.instance.constructor
+meta.class.instance.constructor keyword.operator.new
+meta.constructor.argument.css
+meta.definition.class
+meta.definition.method
+meta.definition.method  meta.definition.param-list
+meta.definition.range -punctuation.definition.constant.range
+meta.delimiter
+meta.delimiter.object.js
+meta.delimiter.statement.js
+meta.diff
+meta.diff.header
+meta.doctype
+meta.end-document.latex support.function
+meta.end-document.latex variable.parameter
+meta.even-tab.group10
+meta.even-tab.group2
+meta.even-tab.group4
+meta.even-tab.group6
+meta.even-tab.group8
+meta.footnote
+meta.function
+meta.function -(meta.tell-block)
+meta.function markup
+meta.function meta.group.braces.curly.function -(meta.group meta.group)
+meta.function meta.odd-tab.group1
+meta.function-call
+meta.function-call entity.name.function -(meta.function-call meta.function)
+meta.function-call punctuation.section.scope.ruby
+meta.function-call punctuation.separator.object
+meta.function-call support.function - variable
+meta.function-call.method.without-arguments
+meta.function-call.method.without-arguments entity.name.function
+meta.function-call.py
+meta.function.method.with-arguments variable.parameter.function
+meta.function.section
+meta.group.assertion keyword.control.group.regexp
+meta.group.assertion punctuation.definition.group
+meta.group.assertion.regexp 
+meta.group.braces
+meta.group.braces meta.group.braces
+meta.group.braces meta.group.braces meta.group.braces
+meta.group.braces meta.group.braces meta.group.braces 
+meta.group.braces meta.group.braces meta.group.braces meta.group.braces
+meta.group.braces meta.group.braces meta.group.braces meta.group.braces 
+meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces
+meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces 
+meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces
+meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces 
+meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces
+meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces 
+meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces
+meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces 
+meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces
+meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces meta.group.braces 
+meta.group.braces.curly meta.delimiter.object.comma
+meta.group.braces.curly punctuation.section.scope
+meta.group.braces.round meta.delimiter.object.comma
+meta.group.braces.round punctuation.section.scope
+meta.group.braces.square meta.delimiter.object.comma
+meta.group.braces.square punctuation.section.scope
+meta.header.blog keyword.other
+meta.header.blog string.unquoted.blog
+meta.header.mail keyword.other
+meta.header.mail string.unquoted
+meta.headers.blog
+meta.headers.blog keyword.other.blog
+meta.headers.blog string.unquoted.blog
+meta.line.entry.logfile
+meta.line.error.logfile
+meta.line.exit.logfile
+meta.odd-tab.group1
+meta.odd-tab.group10
+meta.odd-tab.group11
+meta.odd-tab.group3
+meta.odd-tab.group5
+meta.odd-tab.group7
+meta.odd-tab.group9
+meta.paren-group
+meta.paren-group meta.paren-group
+meta.paren-group meta.paren-group meta.paren-group
+meta.paren-group meta.paren-group meta.paren-group meta.paren-group
+meta.paren-group meta.paren-group meta.paren-group meta.paren-group meta.paren-group
+meta.paren-group meta.paren-group meta.paren-group meta.paren-group meta.paren-group meta.paren-group
+meta.paren-group meta.paren-group meta.paren-group meta.paren-group meta.paren-group meta.paren-group meta.paren-group
+meta.paren-group meta.paren-group meta.paren-group meta.paren-group meta.paren-group meta.paren-group meta.paren-group meta.paren-group
+meta.paren-group meta.paren-group meta.paren-group meta.paren-group meta.paren-group meta.paren-group meta.paren-group meta.paren-group meta.paren-group
+meta.preprocessor
+meta.preprocessor.at-rule keyword.control.at-rule
+meta.preprocessor.c
+meta.preprocessor.c keyword
+meta.preprocessor.c.include
+meta.property-group support.constant.property-value.css
+meta.property-name
+meta.property-value
+meta.property-value constant
+meta.property-value support.constant.named-color.css
+meta.property-value support.constant.property-value.css
+meta.property.function
+meta.property.vendor.microsoft.trident.4
+meta.property.vendor.microsoft.trident.5
+meta.reference
+meta.reference.list markup.underline.link
+meta.scope.django.template
+meta.scope.heredoc
+meta.scope.property-list
+meta.section
+meta.section entity.name.section
+meta.section meta.section
+meta.section meta.section meta.section
+meta.section meta.section meta.section meta.section
+meta.section meta.section meta.section meta.section meta.section
+meta.section meta.section meta.section meta.section meta.section meta.section
+meta.section meta.section meta.section meta.section meta.section meta.section meta.section
+meta.section meta.section meta.section meta.section meta.section meta.section meta.section meta.section
+meta.section meta.section meta.section meta.section meta.section meta.section meta.section meta.section meta.section
+meta.section.html.form
+meta.section.html.head
+meta.selector
+meta.selector entity.name.tag
+meta.selector entity.other.attribute-name.class
+meta.selector entity.other.attribute-name.id
+meta.selector.css entity.name.tag
+meta.selector.css entity.other.attribute-name.class
+meta.selector.css entity.other.attribute-name.id
+meta.selector.css entity.other.attribute-name.tag.pseudo-class
+meta.separator
+meta.sgml.html meta.doctype
+meta.sgml.html meta.doctype entity
+meta.sgml.html meta.doctype string
+meta.source.embedded
+meta.structure.array -punctuation.definition.array
+meta.subtlegradient
+meta.syntax
+meta.tag
+meta.tag entity
+meta.tag punctuation.definition.string
+meta.tag source string
+meta.tag string -source -punctuation
+meta.tag.block
+meta.tag.block.form
+meta.tag.block.script
+meta.tag.form
+meta.tag.inline
+meta.tag.inline entity
+meta.tag.inline source
+meta.tag.key
+meta.tag.meta
+meta.tag.other
+meta.tag.preprocessor.xml
+meta.tag.preprocessor.xml entity
+meta.tag.preprocessor.xml string
+meta.tag.segment
+meta.tag.sgml-declaration.doctype
+meta.tag.sgml.doctype
+meta.tag.sgml.doctype entity
+meta.tag.sgml.doctype string
+meta.tag.structure
+meta.tag.xml
+meta.tell-block meta.tell-block
+meta.tell-block meta.tell-block meta.tell-block
+meta.tell-block meta.tell-block meta.tell-block meta.tell-block
+meta.tell-block meta.tell-block meta.tell-block meta.tell-block meta.tell-block
+meta.tell-block meta.tell-block meta.tell-block meta.tell-block meta.tell-block meta.tell-block
+meta.tell-block meta.tell-block meta.tell-block meta.tell-block meta.tell-block meta.tell-block meta.tell-block
+meta.tell-block meta.tell-block meta.tell-block meta.tell-block meta.tell-block meta.tell-block meta.tell-block meta.tell-block
+meta.tell-block meta.tell-block meta.tell-block meta.tell-block meta.tell-block meta.tell-block meta.tell-block meta.tell-block meta.tell-block
+meta.thomas_aylott
+meta.verbatim
+meta.xml-processing
+meta.xml-processing entity
+meta.xml-processing string
+object.property.function
+other.preprocessor
+punctuation
+punctuation - (punctuation.definition.string | punctuation.definition.comment)
+punctuation.definition
+punctuation.definition -punctuation.definition.comment
+punctuation.definition.arguments
+punctuation.definition.array
+punctuation.definition.constant.range
+punctuation.definition.function
+punctuation.definition.parameters
+punctuation.definition.string -meta.tag
+punctuation.section.array
+punctuation.section.dictionary
+punctuation.section.embedded -(source string source punctuation.section.embedded)
+punctuation.section.function
+punctuation.section.scope
+punctuation.section.scope.curly
+punctuation.separator
+punctuation.separator.arguments
+punctuation.separator.array
+punctuation.separator.function-definition
+punctuation.separator.function-return
+punctuation.separator.key-value -meta.tag
+punctuation.separator.key-value.css
+punctuation.separator.method
+punctuation.separator.object
+punctuation.separator.objects
+punctuation.separator.operator
+punctuation.separator.parameters
+punctuation.separator.parameters.function.js
+punctuation.separator.statement
+punctuation.separator.variable
+punctuation.terminator
+punctuation.terminator.dictionary
+punctuation.terminator.statement
+source
+source comment.block
+source entity.name.tag
+source entity.other.attribute-name
+source entity.other.attribute-name -text.html.basic.embedded 
+source source
+source string source
+source string source punctuation.section.embedded
+source string.interpolated source
+source.camlp4.embedded
+source.camlp4.embedded.parser.ocaml
+source.css
+source.css entity.other.attribute-name.attribute
+source.css meta.attribute-selector keyword.operator.comparison
+source.css meta.scope.property-list meta.property-value punctuation.definition.arguments
+source.css.embedded punctuation.definition.tag.html
+source.java.embedded
+source.js meta.group.braces.round
+source.js.embedded
+source.js.embedded punctuation.definition.tag.html
+source.ocaml constant.numeric.floating-point
+source.ocaml entity.name.tag
+source.ocaml entity.name.type.module
+source.ocaml keyword.operator
+source.ocaml keyword.operator.symbol
+source.ocaml keyword.operator.symbol.infix
+source.ocaml keyword.operator.symbol.infix.floating-point
+source.ocaml keyword.operator.symbol.prefix
+source.ocaml keyword.operator.symbol.prefix.floating-point
+source.ocaml keyword.other.directive.line-number
+source.ocaml meta.record.definition
+source.ocaml support.other.module
+source.plist keyword.operator
+source.plist string.unquoted
+source.regexp keyword.operator
+source.ruby meta.even-tab
+source.ruby meta.even-tab.group10
+source.ruby meta.even-tab.group12
+source.ruby meta.even-tab.group2
+source.ruby meta.even-tab.group4
+source.ruby meta.even-tab.group6
+source.ruby meta.even-tab.group8
+source.ruby.embedded.source.brace
+source.ruby.rails.embedded.one-line
+source.ruby.rails.embedded.return-value.one-line
+storage
+storage -storage.modifier
+storage.modifier
+storage.type
+storage.type.method
+storage.type.user-defined
+storage.type.variant.polymorphic
+string
+string -meta.tag -meta.doctype -string.regexp -string.literal -string.interpolated -string.quoted.literal -string.unquoted
+string -string.unquoted.old-plist -string.unquoted.heredoc
+string constant
+string constant.character.escape
+string constant.other.placeholder
+string source
+string variable
+string | punctuation.definition.string
+string.interpolated
+string.interpolated constant.character.escape
+string.interpolated string
+string.interpolation
+string.literal
+string.quoted source
+string.quoted.docinfo.doctype.DTD
+string.quoted.double.brace
+string.quoted.double.include
+string.quoted.double.multiline
+string.quoted.double.php
+string.quoted.double.ruby.mod
+string.quoted.double.ruby.mod punctuation.definition.string
+string.quoted.literal
+string.quoted.literal punctuation.definition.string
+string.quoted.other.lt-gt.include
+string.quoted.single.brace
+string.quoted.single.php
+string.regexp
+string.regexp comment
+string.regexp constant.character.escape
+string.regexp constant.character.escaped
+string.regexp punctuation.definition.string
+string.regexp punctuation.definition.string keyword.other
+string.regexp source.ruby.embedded
+string.regexp string
+string.regexp string.regexp.arbitrary-repitition
+string.regexp.arbitrary-repitition
+string.regexp.character-class
+string.regexp.group
+string.regexp.group string.regexp.group 
+string.regexp.group string.regexp.group string.regexp.group 
+string.regexp.group string.regexp.group string.regexp.group string.regexp.group 
+string.unquoted
+string.unquoted -string.unquoted.embedded
+string.unquoted string
+string.unquoted.heredoc
+string.unquoted.heredoc string
+support
+support.class
+support.class.exception
+support.constant
+support.constant.core.php
+support.constant.font-name.css
+support.constant.name.tm-language-def
+support.constant.property-value.css
+support.constant.std.php
+support.constant.tm-language-def
+support.function
+support.function - variable
+support.function.any-method
+support.function.any-method - punctuation
+support.other
+support.other.module
+support.other.variable
+support.type
+support.type.exception
+support.type.property-name
+support.type.property-name.css
+support.variable
+text
+text -text.xml.strict
+text comment.block -source
+text meta.paragraph
+text source
+text source string.unquoted
+text source text meta.tag string -punctuation
+text source text source
+text string source
+text string source string
+text string source string source
+text.blog
+text.blog -(text.blog text)
+text.blog text
+text.html declaration.tag
+text.html entity.name.tag.xhtml
+text.html meta.tag
+text.html source
+text.html.markdown
+text.html.markdown markup.heading
+text.html.markdown markup.list meta.paragraph
+text.html.markdown meta.paragraph
+text.html.markdown string
+text.html.ruby source
+text.html.textile markup.underline.link
+text.latex
+text.latex constant.language.general
+text.latex entity.name.section -meta.group -keyword.operator.braces
+text.latex keyword.control.cite
+text.latex keyword.control.ref
+text.latex keyword.operator.braces
+text.latex keyword.operator.brackets
+text.latex keyword.operator.delimiter
+text.latex markup.raw
+text.latex meta.begin-document
+text.latex meta.end-document
+text.latex meta.environment.list
+text.latex meta.environment.list meta.environment.list 
+text.latex meta.environment.list meta.environment.list meta.environment.list 
+text.latex meta.environment.list meta.environment.list meta.environment.list meta.environment.list 
+text.latex meta.environment.list meta.environment.list meta.environment.list meta.environment.list meta.environment.list 
+text.latex meta.environment.list meta.environment.list meta.environment.list meta.environment.list meta.environment.list meta.environment.list 
+text.latex meta.group.braces
+text.latex meta.label.reference
+text.latex support.function -support.function.textit -support.function.emph
+text.latex support.function.section
+text.latex variable.parameter.label
+text.latex variable.parameter.label.reference
+text.mail
+text.mail text
+text.subversion-commit
+text.subversion-commit meta.scope.changed-files
+text.subversion-commit meta.scope.changed-files.svn meta.diff.separator
+text.tex.latex entity
+text.tex.latex meta.function.environment
+text.tex.latex meta.function.environment meta.function.environment
+text.tex.latex support.function
+text.xml.strict meta.tag
+text.xml.strict meta.tag meta.tag
+text.xml.strict meta.tag meta.tag meta.tag
+text.xml.strict meta.tag meta.tag meta.tag meta.tag
+text.xml.strict meta.tag meta.tag meta.tag meta.tag meta.tag
+text.xml.strict meta.tag meta.tag meta.tag meta.tag meta.tag meta.tag
+text.xml.strict meta.tag meta.tag meta.tag meta.tag meta.tag meta.tag meta.tag
+text.xml.strict meta.tag meta.tag meta.tag meta.tag meta.tag meta.tag meta.tag meta.tag
+text.xml.strict meta.tag meta.tag meta.tag meta.tag meta.tag meta.tag meta.tag meta.tag meta.tag
+variable
+variable.js
+variable.language
+variable.language.this.js
+variable.other
+variable.other.constant
+variable.other.global.php
+variable.other.global.safer.php
+variable.other.normal
+variable.other.php
+variable.other.readwrite.class
+variable.other.readwrite.global
+variable.other.readwrite.global.pre-defined
+variable.other.readwrite.instance
+variable.parameter
+variable.parameter -variable.parameter.misc.css
+variable.parameter.cite
+variable.parameter.function
+variable.parameter.function punctuation.separator.object
+variable.parameter.misc.css
