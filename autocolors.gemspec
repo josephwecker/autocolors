@@ -39,6 +39,7 @@ Gem::Specification.new do |s|
     "analysis/vim/commonly-colored.list",
     "analysis/vim/gather.sh",
     "analysis/vim/statements.list",
+    "autocolors.gemspec",
     "format-samples/1/Sweyla866607.css",
     "format-samples/1/Sweyla866607.tmTheme",
     "format-samples/1/Sweyla866607.txt",
