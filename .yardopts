@@ -1,0 +1,8 @@
+--markup markdown
+--no-private
+--protected
+lib/**/*.rb
+bin/*
+- 
+VERSION
+LICENSE.txt
