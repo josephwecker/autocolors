@@ -70,8 +70,8 @@ class ColorScheme
       map_color [name, :fg], NORMH, NORMH, a, b
     end
 
-    #@colors[:normal][:bg] = lab(LOW3, LOW2 )
-    #@colors[:normal][:fg] = lab(HIGH1,NORML)
+    #colors[:normal][:bg] = lab(LOW3, LOW2 )
+    #colors[:normal][:fg] = lab(HIGH1,NORML)
   end
 
   def dark_i(idx) idx end
