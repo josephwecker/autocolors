@@ -62,7 +62,4 @@ module AutoColors
     end
   end
   MAPPING = Mapping.new
-  MAPPING.entries.each do |n, entry|
-    puts "#{n} : #{entry.children_size}"
-  end
 end
