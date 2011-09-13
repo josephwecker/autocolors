@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require 'autocolors'
+
+colorfile = AutoColors::generate_vim_color(ARGV[0])
+
+name = colorfile.match /^" [A-Z0-9_-]+"/u
+
+require 'pp'
+pp name
