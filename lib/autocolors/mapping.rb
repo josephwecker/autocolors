@@ -12,6 +12,10 @@ module AutoColors
       @children = []
     end
 
+    def depth
+      @name.count('.')
+    end
+
     def children_size
       @children.size + @children.reduce(0){|t,c| t + c.children_size}
     end

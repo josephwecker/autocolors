@@ -20,12 +20,61 @@ module AutoColors
       @intensity = [00-(bc*3), 20-(bc*2), 45-bc, 50, 60, 65+bc, 90+(bc*2), 110+(bc*3)]
       @fcolor = [0.0, 0.1*sat, 0.2*sat, 0.4*sat, 0.8*sat, 1.6*sat, 3.2*sat, 6.4*sat]
 
-      @base_colors = (1..10).map{|i| [nrand(0.0, 100.0, -120.0, 120.0), nrand(0.0,100.0,-120.0,120.0)]}
-      @mapping = MAPPING
-
+      @base_colors = (1..10).map{|i| [nrand(0.0, 100.0, -120.0, 120.0), nrand(0.0,100.0,-120.0,120.0), 0]}
+      do_concrete_mapping
     end
 
     protected
+    def do_concrete_mapping
+      @mapping = MAPPING.dup
+      @mapping.entries.each do |name, entry|
+        [:fg_idx, :bg_idx].each{|k| concrete_index(entry,k)}
+        puts "#{name}: #{entry.data[:fg_idx]} / #{entry.data[:bg_idx]}"
+      end
+      require 'pp'
+      pp @base_colors
+    end
+
+    def concrete_index(entry, k)
+      return if entry.data[k].is_a? Integer
+      primes = entry.data[k].count("'")
+      entry.data[k].gsub! "'",''
+      if entry.data[k] =~ /^(\d+)$/ # Direct index
+        if primes > 0
+          entry.data[k] = new_color(Integer($1), primes, entry.depth)
+        else # Otherwise good to go
+          entry.data[k] = Integer($1)
+        end
+      elsif entry.data[k] =~ /^<$/ # Inherit from parent
+        if entry.parent.nil?
+          $stderr.puts "Mapping refers to parent without having a parent"
+          exit(2)
+        else
+          concrete_index(entry.parent, k)
+          if primes == 0 # Directly inherit
+            entry.data[k] = entry.parent.data[k]
+          else # Modify a bit
+            require 'pp'
+            pp entry.parent.data[k]
+            entry.data[k] = new_color(entry.parent.data[k], primes, entry.depth)
+          end
+        end
+      end
+    end
+
+    def new_color(base_idx, diff_level, depth)
+      a,b,count = @base_colors[base_idx]
+      base_diff = (diff_level + 1) * 10 / (depth + 1) * count
+      a_dir = rand(2) == 1 ? -1 : 1
+      b_dir = rand(2) == 1 ? -1 : 1
+      a_p = a + (base_diff * a_dir)
+      b_p = b + (base_diff * b_dir)
+      new_idx = @base_colors.size
+      @base_colors[new_idx] = [a_p, b_p, 0]
+      @base_colors[base_idx][2] += 1
+      return new_idx
+    end
+
     def rand_color; rand(180) - 90 end
     def nrand_color; nrand(0.0, 40.0, -120.0, 120.0) end
 
