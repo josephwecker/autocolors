@@ -1,31 +1,3 @@
-<%
-    map = {
-        [:text]              => 'Normal',
-        [:text, :misc]       => 'NonText',
-        [:text, :whitespace] => 'Whitespace', # ***
-        [:text, :deleted]    => 'TextDeleted',
-        [:text, :emph]       => 'TextEmph',
-        [:text, :error]      => 'TextError',
-        # ...
-        [:comment]           => 'Comment',
-    }
-
-    map = {
-        'Normal'       => [:text, :normal],
-        'Comment'      => [:comment],
-        'String'       => [:literal,:string],
-        'Statement'    => [:keyword],
-        'PreProc'      => [:preprocessor],
-        'Identifier'   => [:variable],
-        'Function'     => [:function],
-        'Constant'     => [:constant],
-        'Type'         => [:type],
-        'Error'        => [:invalid],
-
-        'Character'    => [:literal,:string,:character],
-        'SpecialChar'  => [:literal,:string,:escape],
-    }
-%>
 if version > 580
   hi clear
   if exists("syntax_on")
