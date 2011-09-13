@@ -5,19 +5,19 @@
 
 
 | text                       | 1  | ++  | ~   | 1  | --- | --  | N      | Normal           | markup                             | g *             | font-face??
-| text.whitespace            | <  | <   | <   | <' | <-  | <-  | N      | Whitespace *     | markup.whitespace *                | w               | ?
-| text.deleted               | <' | --  | <-  | <  | <   | <   | X      | TextDeleted *    | markup.deleted *                   | gd              | ?
-| text.inserted              | <' | <+  | <+  | <  | <   | <   | N      | TextInserted *   | markup.inserted *                  | gi              | ?
-| text.emphasis              | <  | <   | <   | <  | <   | <   | I      | TextEmphasis *   | markup.italic                      | ge              | ?
-| text.strong                | <  | <   | <   | <  | <   | <   | B      | TextStrong *     | markup.bold                        | gs              | ?
-| text.heading               | <' | <+  | <+  | <  | <   | <   | U'I'B' | TextHeading *    | markup.heading                     | gh              | ?
-| text.subheading            | <' | <+  | <   | <  | <   | <   | U'I'B' | TextSubheading * | markup.heading.2                   | gu              | ?
-| text.output                | <' | <   | <   | <  | <   | <   | N      | TextOutput *     | markup.output *                    | go              | ?
+| text.whitespace            | <  | <   | <   | <' | <-  | <-  | N      | Whitespace       | markup.whitespace *                | w               | ?
+| text.deleted               | <' | --  | <-  | <  | <   | <   | X      | TextDeleted      | markup.deleted *                   | gd              | ?
+| text.inserted              | <' | <+  | <+  | <  | <   | <   | N      | TextInserted     | markup.inserted *                  | gi              | ?
+| text.emphasis              | <  | <   | <   | <  | <   | <   | I      | TextEmphasis     | markup.italic                      | ge              | ?
+| text.strong                | <  | <   | <   | <  | <   | <   | B      | TextStrong       | markup.bold                        | gs              | ?
+| text.heading               | <' | <+  | <+  | <  | <   | <   | U'I'B' | TextHeading      | markup.heading                     | gh              | ?
+| text.subheading            | <' | <+  | <   | <  | <   | <   | U'I'B' | TextSubheading   | markup.heading.2                   | gu              | ?
+| text.output                | <' | <   | <   | <  | <   | <   | N      | TextOutput       | markup.output *                    | go              | ?
 
 
 | comment                    | 1' | -   | --  | 1  | --- | --  | I'     | Comment          | comment                            | c               | comment-face
-| comment.inline             | <' | <   | <   | <  | <   | <   | I'     | CommentInline *  | comment.line                       | c1              | ?
-| comment.multiline          | <' | <   | <   | <  | <   | <   | I'     | CommentBlock *   | comment.block                      | cm              | ?
+| comment.inline             | <' | <   | <   | <  | <   | <   | I'     | CommentInline    | comment.line                       | c1              | ?
+| comment.multiline          | <' | <   | <   | <  | <   | <   | I'     | CommentBlock     | comment.block                      | cm              | ?
 | comment.special            | <' | <+  | <+  | <  | <   | <   | I'B'   | SpecialComment   | comment.block.documentation        | cs              | ?
 
 | documentation              | 1''| ++  | ~   | 1  | --- | --  | N      | ?                | comment.block.documentation        | sd              | doc-face + doc-string-face
@@ -36,38 +36,61 @@
 | lit.string.interpolated    | <' | <   | <   | <  | <-  | <+  | N      | ?                | string.interpolated                | si              | ? 
 | lit.string.regexp          | <' | <   | <   | <  | <   | <   | N      | ?                | string.regexp                      | sr              | ? 
 | lit.string.char            | <' | <   | <   | <  | <   | <   | N      | Character        | constant.character                 | sc              | ? 
-| lit.string.char.esc        | 2' | <+  | <   | <  | <   | <   | U'     | SpecialChar      | constant.character.escape          | se              | ?
+| lit.string.char.esc        | 2' | <   | <+  | <  | <   | <   | U'     | SpecialChar      | constant.character.escape          | se              | ?
 | lit.string.char.esc.unicode| <' | <   | <   | <  | <   | <   | U'     | ?                | constant.character.escape.unicode *| ?               | ?
 | lit.string.char.esc.hex    | <' | <   | <   | <  | <   | <   | U'     | ?                | constant.character.escape.hex *    | ?               | ?
 | lit.string.char.esc.oct    | <' | <   | <   | <  | <   | <   | U'     | ?                | constant.character.escape.oct *    | ?               | ?
 
 | lit.number                 | 3  | ++  | ~   | 1  | --- | --  | N      | Number           | constant.numeric                   | m               | ?
 | lit.number.int             | <' | <   | <   | <  | <   | <   | N      | ?                | constant.numeric.integer *         | mi              | ?
-| lit.number.int.hex         | <' | <   | <   | <  | <   | <   | N      | ?                | constant.numeric.integer
-| lit.number.int.oct         | <' | <   | <   | <  | <   | <   | N      | ?                |
-| lit.number.int.binary
+#| lit.number.int.hex         | <' | <   | <   | <  | <   | <   | N      | ?                | constant.numeric.integer
+#| lit.number.int.oct         | <' | <   | <   | <  | <   | <   | N      | ?                |
+#| lit.number.int.binary
 | lit.number.int.long        | <' | <   | <   | <  | <   | <   | N      | ?                | constant.numeric.integer.long *    | il              | ?
 | lit.number.float           | <' | <   | <   | <  | <   | <   | N      | Float            | constant.numeric.float *           | mf              | ?
 
-| preproc.shebang            | 
+| lit.boolean                | 3' | ++  | ~   | 1  | --- | --  | N      | Boolean          | ???? | ???? | ????
+| lit.constant               | 3' | ++  | -   | 1  | --- | --  | N      | Constant         | ???? | ???? | ????
+
+| variable                   | 4  | ++  | ~   | 1  | --- | --  | N      | Identifier       | ???? | ???? | ????
+| function                   | 4' | ++  | ~   | 1  | --- | --  | N      | Function         | ???? | ???? | ????
+| statement                  | 5  | ++  | ~   | 1  | --- | --  | N      | Statement        | ???? | ???? | ????
+| statement.conditional      | <' | <   | <   | <  | <   | <   | N      | Conditional      | ???? | ???? | ????
+| statement.repeat           | <' | <   | <   | <  | <   | <   | N      | Repeat           | ???? | ???? | ????
+| statement.label            | <' | <   | <   | <  | <   | <   | U'     | Label            | ???? | ???? | ????
+| statement.operator         | <' | <   | <   | <  | <   | <   | N      | Operator         | ???? | ???? | ????
+| statement.keyword          | <' | <   | <   | <  | <   | <   | N      | Keyword          | ???? | ???? | ????
+
+| control.exception          | 6  | ++  | ~   | 1  | ++  | +   | N      | Exception        | ???? | ???? | ????
+
+| preproc                    | 7  | ++  | ~   | 1  | --- | --  | N      | PreProc          | ???? | ???? | ????
+| preproc.include            | <' | <   | <   | <  | <   | <   | N      | Include          | ???? | ???? | ????
+| preproc.define             | <' | <   | <   | <  | <   | <   | N      | Define           | ???? | ???? | ????
+| preproc.macro              | <' | <   | <   | <  | <   | <   | N      | Macro            | ???? | ???? | ????
+| preproc.precondition       | <' | <   | <   | <  | <   | <   | N      | PreCondit        | ???? | ???? | ????
+#| preproc.shebang            | 
+
+| type                       | 8  | ++  | ~   | 1  | --- | --  | N      | Type             | ???? | ???? | ????
+| type.storageclass          | <' | <   | <   | <  | <   | <   | N      | StorageClass     | ???? | ???? | ????
+| type.structure             | <' | <   | <   | <  | <   | <   | N      | Structure        | ???? | ???? | ????
+| type.typedef               | <' | <   | <   | <  | <   | <   | N      | Typedef          | ???? | ???? | ????
 
 
-| debug.errormsg             |                  |                                    | gr
-| debug.traceback            |                  |                                    | gt
+| delimiter                  | 9  | -   | --  | 1  | --- | --  | N      | Delimiter        | ???? | ???? | ????
+#| delimiter.comment          | ?                | ?                                  | ?               | comment-delimiter-face
+#| delimiter.heredoc
+#| delimiter.string
+#| delimiter.string.escape
+
+| debug                      | 6' | ++  | ++  | 1' | --  | -   | N      | Debug            | ???? | ???? | ????
+| debug.error                | <' | <   | <   | <  | <   | <   | N      | Error            | ???? | ???? | ????
+#| debug.errormsg             |                  |                                    | gr
+#| debug.traceback            |                  |                                    | gt
+
+| ui                         | 1  | ++  | ~   | 1  | --- | --  | N      | ?                | ???? | ???? | ????
+| ui.linenumbers             | 1  | ~   | --  | 1  | --- | --- | N      | LineNR           | ???? | ???? | ????
+| ui.visual                  | 1' | ++  | ~   | 1' | --  | -   | N      | Visual           | ???? | ???? | ????
 
 
-| delimiter                  |
-| delimiter.comment          | ?                | ?                                  | ?               | comment-delimiter-face
-| delimiter.heredoc
-| delimiter.string
-| delimiter.string.escape
-
-
-
-
-text.fc = [1].val
-text.whitespace.fc = [1].val
-text.deleted.fc = [1][1].val
-
-
-
+# Special
+# Tag
