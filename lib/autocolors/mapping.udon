@@ -26,9 +26,8 @@
 | documentation.version      | <' | <   | <   | <  | <   | <   | N      | ?                | comment.version *                  | v               | ? 
 
 
-| literal                    | 2  | ++  | ~   | 1  | --- | --  | N      | ?                | ?                                  | ?               | ?
-
-| lit.string                 | 2' | ++  | ~   | 1  | --- | --  | N      | String           | string                             | s               | string-face
+| lit                        | 2  | ++  | ~   | 1  | --- | --  | N      | ?                | ?                                  | ?               | ?
+| lit.string                 | <' | <   | <   | <  | <   | <   | N      | String           | string                             | s               | string-face
 | lit.string.heredoc         | <' | <   | <   | <  | <   | <   | N      | ?                | string.unquoted                    | sh              | ? 
 | lit.string.quoted          | <' | <   | <   | <  | <   | <   | N      | ?                | string.quoted                      | sx              | ? 
 | lit.string.quoted.double   | <' | <   | <   | <  | <   | <   | N      | ?                | string.quoted.double               | s2              | ? 
@@ -62,3 +61,13 @@
 | delimiter.heredoc
 | delimiter.string
 | delimiter.string.escape
+
+
+
+
+text.fc = [1].val
+text.whitespace.fc = [1].val
+text.deleted.fc = [1][1].val
+
+
+

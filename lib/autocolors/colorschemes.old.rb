@@ -102,16 +102,6 @@ class ColorScheme
     res = ceil  if (! ceil.nil?) && (res > ceil)
     return res
   end
-
-  def curve(start,count,step=1.0)
-    gr = (1.0 + Math.sqrt(5))
-    res = [start]
-    (1..count-1).each do |i|
-      start *= (gr ** step)
-      res << start / 2.0
-    end
-    return res
-  end
 end
 
 #schemes = (0..100).map{ColorScheme.new}.sort_by{|c|c.contrast}
