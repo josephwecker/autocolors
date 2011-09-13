@@ -17,6 +17,7 @@ STILL EXPERIMENTAL AND CHANGING RAPIDLY. Feel free to contact me w/ suggestions
 Generates a name for you if left blank - saves it to colorscheme\_name.vim in your
 cwd. I know, not very flexible. If you're really curious about how beautiful
 these are though, you can do this:
+
     $ cd ~/.vim/colors
     $ autocolors
     $ autocolors
