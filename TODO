@@ -2,3 +2,4 @@
 - Fix TODO / etc. so they're more coherent
 - Change mapping a bit so that one tick is very small variation, and more ticks
   increase but linearly, and use more ticks in most places.
+- Integrate with http://bashish.sourceforge.net/ ?
