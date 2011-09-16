@@ -119,16 +119,16 @@ module AutoColors
                    [0xa8,0xa8,0xa8],[0xb2,0xb2,0xb2],[0xbc,0xbc,0xbc],[0xc6,0xc6,0xc6],
                    [0xd0,0xd0,0xd0],[0xda,0xda,0xda],[0xe4,0xe4,0xe4],[0xee,0xee,0xee]]
 
-  CUBE256 = CUBE256_8NORM.map {|rgb| Colors::Color.new(rgb)} +
-            CUBE256_BRIGHT.map{|rgb| Colors::Color.new(rgb)} +
+  CUBE256 = CUBE256_8NORM.map {|rgb| Color.new(rgb)} +
+            CUBE256_BRIGHT.map{|rgb| Color.new(rgb)} +
             (0..(6*6*6 - 1)).map do |i|
               b = i % 6; i = (i - b) / 6
               g = i % 6; i = (i - g) / 6
-              Colors::Color.new([CUBE256_STEPS[i % 6],
+              Color.new([CUBE256_STEPS[i % 6],
                                  CUBE256_STEPS[g],
                                  CUBE256_STEPS[b]])
             end +
-            CUBE256_GRAYS.map{|rgb| Colors::Color.new(rgb)}
+            CUBE256_GRAYS.map{|rgb| Color.new(rgb)}
 
   class Color
     def to_256

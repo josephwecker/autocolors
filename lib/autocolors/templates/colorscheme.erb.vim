@@ -1,3 +1,11 @@
+" <%= scheme.name.upcase %>
+" -----------------------------------------------------------------------------
+" Vim color file
+" Generated automatically by autocolors version <%= VERSION %>
+"   https://github.com/josephwecker/autocolors
+" Public Domain
+" -----------------------------------------------------------------------------
+
 if version > 580
   hi clear
   if exists("syntax_on")
@@ -5,32 +13,45 @@ if version > 580
   endif
 endif
 
-let g:colors_name = expand('<sfile>:t:r')
+"let g:colors_name = expand('<sfile>:t:r')
+let g:colors_name = '<%= scheme.name %>'
 
 if has("gui_running") || &t_Co > 16
   if &background == "light"
-   <%- c = scheme[:light] -%>
-   <%- map.each do |vim_name, keys| cc = c; keys.each{|k| cc=cc[k]} -%>
-    hi <%= vim_name %> cterm=<%=cc[:fg].s_cterm %> gui=<%=cc[:fg].s_high %>
-    hi <%= vim_name %> ctermbg=<%=cc[:bg].to_256 %> ctermfg=<%= cc[:fg].to_256 %> guifg=<%=cc[:fg] %> guibg=<%=cc[:bg]%>
+   <%- c = scheme.light -%>
+   <%- c.each do |name, data| -%>
+    <%- if data[:to_vim] != '?' -%>
+    hi <%= data[:to_vim] %> cterm=<%=data[:styles] %> gui=<%=data[:styles] %>
+    hi <%= data[:to_vim] %> ctermbg=<%=data[:bg].to_256 %> ctermfg=<%= data[:fg].to_256 %>
+    hi <%= data[:to_vim] %> guifg=<%=data[:fg] %> guibg=<%=data[:bg] %>
+    <%- end -%>
    <%- end -%>
   else
-   <%- c = scheme[:dark] -%>
-   <%- map.each do |vim_name, keys| cc = c; keys.each{|k| cc=cc[k]} -%>
-    hi <%= vim_name %> cterm=<%=cc[:fg].s_cterm %> gui=<%=cc[:fg].s_high %>
-    hi <%= vim_name %> ctermbg=<%=cc[:bg].to_256 %> ctermfg=<%= cc[:fg].to_256 %> guifg=<%=cc[:fg] %> guibg=<%=cc[:bg]%>
+   <%- c = scheme.dark -%>
+   <%- c.each do |name, data| -%>
+    <%- if data[:to_vim] != '?' -%>
+    hi <%= data[:to_vim] %> cterm=<%=data[:styles] %> gui=<%=data[:styles] %>
+    hi <%= data[:to_vim] %> ctermbg=<%=data[:bg].to_256 %> ctermfg=<%= data[:fg].to_256 %>
+    hi <%= data[:to_vim] %> guifg=<%=data[:fg] %> guibg=<%=data[:bg]%>
+    <%- end -%>
    <%- end -%>
   endif
 else
   if &background == "light"
-   <%- c = scheme[:light] -%>
-   <%- map.each do |vim_name, keys| cc = c; keys.each{|k| cc=cc[k]} -%>
-    hi <%=vim_name%> term=<%=cc[:fg].s_term%> cterm=<%=cc[:fg].s_lcterm%> ctermbg=<%=cc[:bg].to_16%> ctermfg=<%=cc[:fg].to_16%>
+   <%- c = scheme.light -%>
+   <%- c.each do |name, data| -%>
+    <%- if data[:to_vim] != '?' -%>
+    hi <%= data[:to_vim] %> term=<%=data[:styles] %> cterm=<%=data[:styles] %>
+    hi <%= data[:to_vim] %> ctermbg=<%=data[:bg].to_16%> ctermfg=<%=data[:fg].to_16%>
+    <%- end -%>
    <%- end -%>
   else
-   <%- c = scheme[:dark] -%>
-   <%- map.each do |vim_name, keys| cc = c; keys.each{|k| cc=cc[k]} -%>
-    hi <%=vim_name%> term=<%=cc[:fg].s_term%> cterm=<%=cc[:fg].s_lcterm%> ctermbg=<%=cc[:bg].to_16%> ctermfg=<%=cc[:fg].to_16%>
+   <%- c = scheme.dark -%>
+   <%- c.each do |name, data| -%>
+    <%- if data[:to_vim] != '?' -%>
+    hi <%= data[:to_vim] %> term=<%=data[:styles] %> cterm=<%=data[:styles] %>
+    hi <%= data[:to_vim] %> ctermbg=<%=data[:bg].to_16%> ctermfg=<%=data[:fg].to_16%>
+    <%- end -%>
    <%- end -%>
   endif
 endif

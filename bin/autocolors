@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+require 'autocolors'
+
+colorfile = AutoColors::generate_vim_colors(ARGV[0])
+
+name = colorfile.match(/^" ([A-Z0-9_-]+)/u)[1].downcase
+
+fname = name + '.vim'
+
+File.open(fname,'w+'){|f| f.write(colorfile)}
+$stderr.puts "Wrote new syntax file: #{fname}"
