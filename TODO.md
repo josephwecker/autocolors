@@ -1,9 +1,17 @@
-
-- [] Fix translation to 256-colorspace
-- [] Fix translation to 16-colorspace
-- [] Fix overall mapping structure heirarchy
-- [] Finish out all vim (esp. ui at this point) groups
-- [] Heroku site for showing it off / generating them online
-- [] Fix commandline interface so it is standard and good
-- [] Blog entry
-- [] Announce
+- [ ] A real good sample syntax/document with "common" densities for displaying full colorsheme - both standard and extended.
+- [ ] Autogenerate some vim examples in order to test colorschemes generally for iterating
+- [ ] Fix highlight color so it's more coherent
+- [ ] Fix TODO / etc. so they're more coherent
+- [~] Change mapping a bit so that one tick is very small variation, and more ticks increase but linearly, and use more ticks in most places.
+- [ ] Fix vim "~"-line background color so it's only very slightly different from normal background.
+- [ ] Heroku site for showing it off / generating them online
+- [ ] Indicate frequency and average sizes in mapping - for use in constraints
+- [ ] Constraints - make sure certain groups/mappings end up with colors that are far enough apart, or not too far apart, etc. etc. After first pass colors, modify according to constraints until it's stable.
+- [ ] Fix translation to 256-colorspace
+- [ ] Fix translation to 16-colorspace
+- [ ] Fix overall mapping structure heirarchy
+- [ ] Finish out all vim (esp. ui at this point) groups
+- [ ] Fix commandline interface so it is standard and good
+- [ ] Integrate with http://bashish.sourceforge.net/ ?
+- [ ] Blog entry
+- [ ] Announce
