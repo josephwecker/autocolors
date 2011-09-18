@@ -1,0 +1,32 @@
+set nocompatible
+syntax on
+let c_comment_strings=1
+let t_Co=256
+if has("multi_byte")
+  if &termencoding == ""
+    let &termencoding = &encoding
+  endif
+  set encoding=utf-8
+  setglobal fileencoding=utf-8
+  set fileencodings=ucs-bom,utf-8,latin1
+  set ambiwidth=double
+endif
+set guifont=Consolas:h13
+set number
+set autoindent
+filetype plugin indent on
+source $VIMRUNTIME/plugin/tohtml.vim
+let g:html_use_xhtml = 1
+let g:html_use_encoding = "UTF-8"
+let g:html_use_css = 0
+let g:html_number_lines = 1
+let g:html_no_progress = 1
+set guioptions-=T
+set guioptions-=m
+set textwidth=79
+let haxe_no_trail_space_error=1
+let haxe_comment_strings=1
+let haxe_haxedoc=1
+let g:erlangFold=0
+set tabstop=4 shiftwidth=4 softtabstop=4 ai expandtab smarttab smartindent
+au FileType vim,html,css,ruby,erlang set tabstop=2 shiftwidth=2 softtabstop=2 ai expandtab smarttab smartindent
