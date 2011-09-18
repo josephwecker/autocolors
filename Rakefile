@@ -57,3 +57,93 @@ task :default => :test
 
 require 'yard'
 YARD::Rake::YardocTask.new
+
+
+
+langs = {'ActionScript'  =>['as'],
+         'C'             =>['c','h'],
+         'C#'            =>['cs'],
+         'C++'           =>['cpp','hpp'],
+         'Common Lisp'   =>['lisp'],
+         #'CSS'           =>['css'],
+         'Emacs Lisp'    =>['el'],
+         'Erlang'        =>['erl','hrl'],
+         'Haxe'          =>['hx'],
+         'Haskell'       =>['hs'],
+         #'HTML'          =>['html'],
+         'Java'          =>['java'],
+         'JavaScript'    =>['js'],
+         'Lua'           =>['lua'],
+         'Objective-C'   =>['m','h'],
+         'Perl'          =>['pl'],
+         'PHP'           =>['php'],
+         'Python'        =>['py'],
+         'Ruby'          =>['rb'],
+         'Scala'         =>['scala'],
+         'Scheme'        =>['scm','ss'],
+         'Shell'         =>['sh']
+         #'XML'           =>['xml']
+}
+
+namespace :samples do
+  require 'pp'
+  desc 'Generate html syntax highlighting samples for pieces of popular opensource'
+  task :generate => [:update_repositories, :generate_colorschemes, :generate_html]
+
+  $sample_files = {}
+  task :update_repositories do
+    require 'json'
+    require 'uri'
+    currentd = Dir.pwd
+    mkdir_p './.samples/repos'
+    Dir.chdir './.samples/repos'
+    langs.each do |lang, extensions|
+      puts "\n\n=== Checking popular repositories for:  #{lang} ==="
+      popular = `curl --retry 4 'https://github.com/languages/#{URI.escape(lang)}'`[/Most Forked This Month.*?<\/div>/mui]
+      repos = popular.scan /href="\/([^\/"]+)\/([^"\/]+)"/
+      search_paths = []
+      repos.each do |user, repo|
+        puts "\n--- #{user} / #{repo} ---"
+        unless File.exists? "#{user}/#{repo}"
+          info = JSON.parse `curl --retry 2 'https://api.github.com/repos/#{user}/#{repo}'`
+          unless info['clone_url'].nil?
+            mkdir_p "#{user}"
+            `git clone --depth 1 '#{info['clone_url']}' '#{user}/#{repo}'`
+          end
+        end
+        search_paths << "'./#{user}/#{repo}'"
+      end
+      extensions.each do |ext|
+        cmd = "find -x -f #{search_paths.join(' ')} -iregex '.*\\.#{ext}' -type f -size 3"
+        candidate_files = `#{cmd}`.split("\n").map{|fn|fn.strip}
+        randf = candidate_files[rand(candidate_files.size)]
+        unless randf.nil? or randf == ''
+          git_path = randf.split '/'
+          git_path.shift if git_path[0] == '.'
+          user = git_path.shift
+          repo = git_path.shift
+          lang = lang + ' (2)' if $sample_files.has_key? lang
+          $sample_files[lang] = ["https://github.com/#{user}/#{repo}/tree/master/#{git_path.join('/')}", File.expand_path(randf)]
+        end
+      end
+    end
+    pp $sample_files
+    Dir.chdir currentd
+  end
+
+  $sample_colorschemes = []
+  task :generate_colorschemes do
+    currentd = Dir.pwd
+    mkdir_p './.samples/schemes'
+    Dir.chdir './.samples/schemes'
+    `rm * 2>/dev/null`
+    (1..10).each{ `/bin/bash -c '../../bin/autocolors'` }
+    $sample_colorschemes = `ls`.strip.split(/\s+/).map{|c| c.strip}
+    pp $sample_colorschemes
+    Dir.chdir currentd
+  end
+
+  task :generate_html do
+
+  end
+end
