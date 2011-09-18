@@ -103,7 +103,7 @@ module AutoColors
 
     def new_color(base_idx, diff_level, depth)
       a,b,count = @base_colors[base_idx]
-      base_diff = (diff_level.to_f + 1.0) * 10.0 / ((depth.to_f + 1.0) / 2.0) * count.to_f
+      base_diff = (diff_level.to_f + 1.0) * 4.0 / ((depth.to_f + 1.0) / 2.0) * count.to_f
       a_dir = rand(2) == 1 ? -1.0 : 1.0
       b_dir = rand(2) == 1 ? -1.0 : 1.0
       a_p = a + (base_diff * a_dir)
