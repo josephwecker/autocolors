@@ -1,4 +1,6 @@
 set nocompatible
+au BufNewFile,BufRead *.hx set filetype=haxe
+au BufNewFile,BufRead *.as set filetype=actionscript
 syntax on
 let c_comment_strings=1
 let t_Co=256
