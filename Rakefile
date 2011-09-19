@@ -160,7 +160,7 @@ namespace :samples do
       gh_loc, f_loc = locs
       $sample_colorschemes.each do |cs|
         ['dark','light'].each do |bg|
-          dest_fname = "./#{cs}-#{bg}-#{friendlyname(lang)}.html"
+          dest_fname = "./#{cs}-#{friendlyname(lang)}-#{bg}.html"
           precmds  = ["set runtimepath+=../../.samples/vim/",
                       "set background=#{bg}",
                       "colorscheme #{cs}"]
