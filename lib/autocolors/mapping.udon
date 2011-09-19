@@ -10,6 +10,7 @@
 | text.inserted              | <' | <+  | <+  | <  | <   | <   | N      | TextInserted     | markup.inserted *                  | gi              | ?
 | text.emphasis              | <  | <   | <   | <  | <   | <   | I      | TextEmphasis     | markup.italic                      | ge              | ?
 | text.strong                | <  | <   | <   | <  | <   | <   | B      | TextStrong       | markup.bold                        | gs              | ?
+| text.title                 | <' | <   | <   | <  | <   | <   | U'     | Title            | ?????                              | ??????          | ???????
 | text.heading               | <' | <+  | <+  | <  | <   | <   | U'I'B' | TextHeading      | markup.heading                     | gh              | ?
 | text.subheading            | <' | <+  | <   | <  | <   | <   | U'I'B' | TextSubheading   | markup.heading.2                   | gu              | ?
 | text.output                | <' | <   | <   | <  | <   | <   | N      | TextOutput       | markup.output *                    | go              | ?
