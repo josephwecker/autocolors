@@ -42,10 +42,10 @@ module AutoColors
         ddat = entry.data.dup
         fg_a, fg_b, _ = @base_colors[ldat[:fg_idx]]
         bg_a, bg_b, _ = @base_colors[ldat[:bg_idx]]
-        ldat[:fg] = lab(light_i(ldat[:fg_intensity]), ldat[:fg_saturation], fg_a, fg_b)
-        ldat[:bg] = lab(light_i(ldat[:bg_intensity]), ldat[:bg_saturation], bg_a, bg_b)
-        ddat[:fg] = lab( dark_i(ldat[:fg_intensity]), ldat[:fg_saturation], fg_a, fg_b)
-        ddat[:bg] = lab( dark_i(ldat[:bg_intensity]), ldat[:bg_saturation], bg_a, bg_b)
+        ldat[:fg] = lab(light_i(ldat[:fg_intensity]), light_s(ldat[:fg_saturation]), fg_a, fg_b)
+        ldat[:bg] = lab(light_i(ldat[:bg_intensity]), light_s(ldat[:bg_saturation]), bg_a, bg_b)
+        ddat[:fg] = lab( dark_i(ldat[:fg_intensity]),  dark_s(ldat[:fg_saturation]), fg_a, fg_b)
+        ddat[:bg] = lab( dark_i(ldat[:bg_intensity]),  dark_s(ldat[:bg_saturation]), bg_a, bg_b)
         @dark[name] = ddat
         @light[name] = ldat
       end
@@ -82,25 +82,27 @@ module AutoColors
       c_plus   = entry.data[k].count('+')
       c_minus  = entry.data[k].count('-')
       c_neut   = entry.data[k].count('~')
+      val = 0
       if c_parent == 0
-        entry.data[k] = 3 - c_minus + c_plus
+        val = 3 - c_minus + c_plus
       else
         concrete_lvl(entry.parent, k)
         offset = entry.parent.data[k]
-        entry.data[k] = offset + c_plus - c_minus
+        val = offset + c_plus - c_minus
       end
+      entry.data[k] = [[val,7].min,0].max
     end
 
     def concrete_style(entry)
       entry.data[:styles] = 'NONE'
     end
 
-    def dark_i(idx) idx end
-    def light_i(idx) 7 - idx end
+    def dark_i(idx) @intensity[idx] end
+    def light_i(idx) @intensity[7 - idx] - 0.005  end
+    def dark_s(idx) @fcolor[idx] end
+    def light_s(idx) @fcolor[idx] + 0.01 end
   
-    def lab(intensity, saturation, a, b)
-      Color.new([@intensity[intensity], a * @fcolor[saturation], b * @fcolor[saturation]])
-    end
+    def lab(intensity,saturation,a,b) Color.new([intensity, a * saturation, b * saturation]) end
 
     def new_color(base_idx, diff_level, depth)
       a,b,count = @base_colors[base_idx]
