@@ -62,26 +62,26 @@ YARD::Rake::YardocTask.new
 
 langs = {#'ActionScript'  =>['as'],
          'C'             =>['c','h'],
-         #'C#'            =>['cs'],
+         'C#'            =>['cs'],
          'C++'           =>['cpp','hpp'],
          'Common Lisp'   =>['lisp'],
          ###'CSS'           =>['css'],
-         #'Emacs Lisp'    =>['el'],
+         'Emacs Lisp'    =>['el'],
          'Erlang'        =>['erl','hrl'],
-         #'Haxe'          =>['hx'],
-         #'Haskell'       =>['hs'],
+         'Haxe'          =>['hx'],
+         'Haskell'       =>['hs'],
          ###'HTML'          =>['html'],
          'Java'          =>['java'],
          'JavaScript'    =>['js'],
-         #'Lua'           =>['lua'],
+         'Lua'           =>['lua'],
          'Objective-C'   =>['m','h'],
          'Perl'          =>['pl'],
-         #'PHP'           =>['php'],
+         'PHP'           =>['php'],
          'Python'        =>['py'],
          'Ruby'          =>['rb'],
-         #'Scala'         =>['scala'],
+         'Scala'         =>['scala'],
          'Scheme'        =>['scm','ss'],
-         #'Shell'         =>['sh']
+         'Shell'         =>['sh']
          ###'XML'           =>['xml']
 }
 
