@@ -15,15 +15,16 @@ module AutoColors
     end
 
     def generate
-      bc = nrand(-1,2,-4,5)
+      bc = nrand(-1.0,1.5,-4.0,5.5)
       sat = rand * 2.0
       @contrast = bc    # Value between -4.0 and 5.0 used to contract/spread out intensity values
       @saturation = sat # Value between 0.0 and 2.0 used to contract/intensify color values
 
-      @intensity = [00-(bc*3), 20-(bc*2), 45-bc, 50, 60, 65+bc, 90+(bc*2), 110+(bc*3)]
-      @fcolor = [0.0, 0.1*sat, 0.2*sat, 0.4*sat, 0.8*sat, 1.6*sat, 3.2*sat, 6.4*sat]
+      #@intensity = [0.0-(bc*3.0), 20.0-(bc*2.0), 45.0-bc, 50.0, 60.0, 65.0+bc, 90.0+(bc*2.0), 110.0+(bc*3.0)]
+      @intensity = [[3.0 - (bc*3.0),0].max, 20.0-(bc*2.0), 45.0-bc, 50.0, 60.0, 65.0+bc, 90.0+(bc*2.0), 110.0+(bc*3.0)]
+      @fcolor = [0.0, 0.1*sat, 0.5*sat, 1.0*sat, 1.5*sat, 2.0*sat, 2.5*sat, 3.0*sat]
 
-      @base_colors = (1..10).map{|i| [nrand(0.0, 100.0, -120.0, 120.0), nrand(0.0,100.0,-120.0,120.0), 1]}
+      @base_colors = (1..10).map{|i| [nrand(0.0, 70.0, -120.0, 120.0), nrand(0.0,70.0,-120.0,120.0), 1]}
       do_concrete_mapping
     end
 
