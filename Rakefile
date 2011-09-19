@@ -169,28 +169,32 @@ namespace :samples do
                       "qa!"]
           precmds = precmds.map{|c| "--cmd '#{c}'"}.join(' ')
           postcmds = postcmds.map{|c| "-c '#{c}'"}.join(' ')
-          sh "gvim -f -n -g -b -N --noplugin #{precmds} -u '#{vimrc}' '#{f_loc}' #{postcmds}"
+          cmd = "gvim -i NONE -f -n -g -b -N --noplugin #{precmds} -u '#{vimrc}' '#{f_loc}' #{postcmds}"
+          `#{cmd}`
+          prefiles << ["#{dest_fname}.pre", gh_loc, bg, cs]
 
-          txt = IO.read("#{dest_fname}.pre")
-          bg_base = '#333'
-          fg_base = '#777'
-          if txt =~ /<body\s*bgcolor="([^"]+)"\s*text="([^"]+)"/
-            bg_base = $1
-            fg_base = $2
-          end
-
-          txt = txt[/<font face.*?<\/font>\s*<\/body>/mui]
-          header = <<-HTML
-            <div class="sample #{bg}" style="background-color: #{bg_base}; color: #{fg_base};">
-              <div class="colorscheme-name">#{cs}/#{bg}</div>
-              <div class="filename">#{gh_loc}</div>
-              <div class="vim">
-          HTML
-          txt = txt.gsub(/\A<[^<]+/mui,header).gsub(/<\/font>\s*<\/body>.*/mui, '</div></div>')
-          File.open(dest_fname,'w+'){|f| f.write(txt)}
-          sh "rm #{dest_fname}.pre"
         end
       end
+    end
+    prefiles.each do |destf, gh_loc, bg, cs|
+      txt = IO.read(destf)
+      bg_base = '#333'
+      fg_base = '#777'
+      if txt =~ /<body\s*bgcolor="([^"]+)"\s*text="([^"]+)"/
+        bg_base = $1
+        fg_base = $2
+      end
+
+      txt = txt[/<font face.*?<\/font>\s*<\/body>/mui]
+      header = <<-HTML
+        <div class="sample #{bg}" style="background-color: #{bg_base}; color: #{fg_base};">
+          <div class="colorscheme-name">#{cs}/#{bg}</div>
+          <div class="filename">#{gh_loc}</div>
+          <div class="vim">
+      HTML
+      txt = txt.gsub(/\A<[^<]+/mui,header).gsub(/<\/font>\s*<\/body>.*/mui, '</div></div>')
+      File.open(destf[0..-5],'w+'){|f| f.write(txt)}
+      sh "rm #{destf}"
     end
     Dir.chdir currentd
   end
