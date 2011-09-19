@@ -154,6 +154,8 @@ namespace :samples do
     currentd = Dir.pwd
     mkdir_p  './.samples/html'
     Dir.chdir './.samples/html'
+    `rm *.html *.pre`
+    prefiles = []
     $sample_files.each do |lang, locs|
       gh_loc, f_loc = locs
       $sample_colorschemes.each do |cs|
