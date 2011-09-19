@@ -199,6 +199,7 @@ namespace :samples do
     Dir.chdir currentd
   end
 
+  desc 'Aggregate html samples in .samples/html and style them > quicktest.html'
   task :combine_html do
     start = <<-HTML
       <html>
