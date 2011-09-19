@@ -4,7 +4,7 @@
 | ignore                     | 1  | --- | --  | 1  | --- | --  | V      | Ignore           | markup.ignore *                    | invisible *     | ?
 
 
-| text                       | 1  | ++  | ~   | 1  | --- | --  | N      | Normal           | markup                             | g *             | font-face??
+| text                       | 1  | ++  | -   | 1  | --- | --  | N      | Normal           | markup                             | g *             | font-face??
 | text.whitespace            | <  | <   | <   | <' | <-  | <-  | N      | Whitespace       | markup.whitespace *                | w               | ?
 | text.deleted               | <' | --  | <-  | <  | <   | <   | X      | TextDeleted      | markup.deleted *                   | gd              | ?
 | text.inserted              | <' | <+  | <+  | <  | <   | <   | N      | TextInserted     | markup.inserted *                  | gi              | ?
