@@ -30,7 +30,7 @@ module AutoColors
 
     protected
     def do_concrete_mapping
-      @mapping = MAPPING.dup
+      @mapping = Marshal.load(Marshal.dump(MAPPING))
       @mapping.entries.each do |name, entry|
         [:fg_idx, :bg_idx].each{|k| concrete_index(entry,k)}
         [:fg_intensity, :fg_saturation, :bg_intensity, :bg_saturation].each{|k| concrete_lvl(entry,k)}
