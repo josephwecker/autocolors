@@ -57,3 +57,198 @@ task :default => :test
 
 require 'yard'
 YARD::Rake::YardocTask.new
+
+
+
+langs = {#'ActionScript'  =>['as'],
+         'C'             =>['c','h'],
+         'C#'            =>['cs'],
+         'C++'           =>['cpp','hpp'],
+         'Common Lisp'   =>['lisp'],
+         ###'CSS'           =>['css'],
+         'Emacs Lisp'    =>['el'],
+         'Erlang'        =>['erl','hrl'],
+         'Haxe'          =>['hx'],
+         'Haskell'       =>['hs'],
+         ###'HTML'          =>['html'],
+         'Java'          =>['java'],
+         'JavaScript'    =>['js'],
+         'Lua'           =>['lua'],
+         'Objective-C'   =>['m','h'],
+         'Perl'          =>['pl'],
+         'PHP'           =>['php'],
+         'Python'        =>['py'],
+         'Ruby'          =>['rb'],
+         'Scala'         =>['scala'],
+         'Scheme'        =>['scm','ss'],
+         'Shell'         =>['sh']
+         ###'XML'           =>['xml']
+}
+
+
+def friendlyname(str)
+  str.downcase.gsub('#','-sharp').gsub(/\s+/,'_').gsub(/[^a-zA-Z0-9+_-]/,'')
+end
+
+namespace :samples do
+  require 'pp'
+  desc 'Generate html syntax highlighting samples for pieces of popular opensource'
+  task :generate => [:update_repositories, :generate_colorschemes, :generate_html]
+
+  $sample_files = {}
+  task :update_repositories do
+    require 'json'
+    require 'uri'
+    currentd = Dir.pwd
+    mkdir_p './.samples/repos'
+    Dir.chdir './.samples/repos'
+    langs.each do |lang, extensions|
+      puts "\n\n=== Checking popular repositories for:  #{lang} ==="
+      popular = `curl --retry 4 'https://github.com/languages/#{URI.escape(lang)}'`[/Most Forked This Month.*?<\/div>/mui]
+      repos = popular.scan /href="\/([^\/"]+)\/([^"\/]+)"/
+      search_paths = []
+      repos.each do |user, repo|
+        puts "--- #{user} / #{repo} ---"
+        unless File.exists? "#{user}/#{repo}"
+          puts ''
+          info = JSON.parse `curl --retry 2 'https://api.github.com/repos/#{user}/#{repo}'`
+          unless info['clone_url'].nil?
+            mkdir_p "#{user}"
+            `git clone --depth 1 '#{info['clone_url']}' '#{user}/#{repo}'`
+          end
+        end
+        search_paths << "'./#{user}/#{repo}'"
+      end
+      extensions.each do |ext|
+        cmd = "find -x -f #{search_paths.join(' ')} -iregex '.*\\.#{ext}' -type f -size 4"
+        candidate_files = `#{cmd}`.split("\n").map{|fn|fn.strip}
+        randf = candidate_files[rand(candidate_files.size)]
+        unless randf.nil? or randf == ''
+          git_path = randf.split '/'
+          git_path.shift if git_path[0] == '.'
+          user = git_path.shift
+          repo = git_path.shift
+          lang = lang + ' (2)' if $sample_files.has_key? lang
+          $sample_files[lang] = ["https://github.com/#{user}/#{repo}/tree/master/#{git_path.join('/')}", File.expand_path(randf)]
+        end
+      end
+    end
+    pp $sample_files
+    Dir.chdir currentd
+  end
+
+  $sample_colorschemes = []
+  task :generate_colorschemes do
+    currentd = Dir.pwd
+    mkdir_p './.samples/vim/colors'
+    Dir.chdir './.samples/vim/colors'
+    `rm * 2>/dev/null`
+    (1..25).each{ `/bin/bash -c '../../../bin/autocolors'` }
+    $sample_colorschemes = `ls *.vim`.strip.split(/\s+/).map{|c| c.strip[0..-5]}
+    pp $sample_colorschemes
+    Dir.chdir currentd
+  end
+
+  task :generate_html do
+    vimrc = '../../.helper-vimrc'
+    currentd = Dir.pwd
+    mkdir_p  './.samples/html'
+    Dir.chdir './.samples/html'
+    `rm *.html *.pre`
+    prefiles = []
+    $sample_files.each do |lang, locs|
+      gh_loc, f_loc = locs
+      $sample_colorschemes.each do |cs|
+        ['dark','light'].each do |bg|
+          dest_fname = "./#{cs}-#{friendlyname(lang)}-#{bg}.html"
+          precmds  = ["set runtimepath+=../../.samples/vim/",
+                      "set background=#{bg}",
+                      "colorscheme #{cs}"]
+          postcmds = ["TOhtml",
+                      "w #{dest_fname}.pre",
+                      "qa!"]
+          precmds = precmds.map{|c| "--cmd '#{c}'"}.join(' ')
+          postcmds = postcmds.map{|c| "-c '#{c}'"}.join(' ')
+          cmd = "gvim -i NONE -f -n -g -b -N --noplugin #{precmds} -u '#{vimrc}' '#{f_loc}' #{postcmds}"
+          `#{cmd}`
+          prefiles << ["#{dest_fname}.pre", gh_loc, bg, cs]
+
+        end
+      end
+    end
+    prefiles.each do |destf, gh_loc, bg, cs|
+      txt = IO.read(destf)
+      bg_base = '#333'
+      fg_base = '#777'
+      if txt =~ /<body\s*bgcolor="([^"]+)"\s*text="([^"]+)"/
+        bg_base = $1
+        fg_base = $2
+      end
+
+      txt = txt[/<font face.*?<\/font>\s*<\/body>/mui]
+      header = <<-HTML
+        <div class="sample #{bg}" style="background-color: #{bg_base}; color: #{fg_base};">
+          <div class="colorscheme-name">#{cs}/#{bg}</div>
+          <div class="filename">#{gh_loc}</div>
+          <div class="vim">
+      HTML
+      txt = txt.gsub(/\A<[^<]+/mui,header).gsub(/<\/font>\s*<\/body>.*/mui, '</div></div>')
+      File.open(destf[0..-5],'w+'){|f| f.write(txt)}
+      sh "rm #{destf}"
+    end
+    Dir.chdir currentd
+  end
+
+  desc 'Aggregate html samples in .samples/html and style them > quicktest.html'
+  task :combine_html do
+    start = <<-HTML
+      <html>
+      <head><title>Sample colorschemes</title>
+        <style type="text/css">
+          body {
+            background-color: #444;
+          }
+          span {
+            padding-left: 3px;
+          }
+          div.sample {
+            width: 390px;
+            height: 500px;
+            overflow: hidden;
+            border: 4px solid black;
+            margin: 5px;
+            float: left;
+            font-family: Consolas, Inconsolas, Monaco, monotype;
+            font-size: 8pt;
+            white-space: nowrap;
+          }
+          div.colorscheme-name {
+            font-family: sans-serif;
+            background-color: black;
+            color: #cdd;
+            text-decoration: underline;
+            font-size: 12pt;
+          }
+          div.filename {
+            font-family: sans-serif;
+            background-color: black;
+            color: #cdd;
+            font-size: 7pt;
+            padding-bottom: 4px;
+            border-bottom: 4px solid white;
+          }
+          div.vim {
+            height: 450px;
+            overflow: scroll;
+          }
+
+        </style>
+      </head>
+      <body>
+    HTML
+
+    File.open('quicktest.html','w+'){|f| f.write(start) }
+    sh 'ls .samples/html/*.html | grep -v actionscript | grep -v haxe | xargs cat >> quicktest.html'
+    File.open('quicktest.html','a'){|f| f.write("\n</body></html>")}
+  end
+end

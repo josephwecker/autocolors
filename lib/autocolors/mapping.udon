@@ -4,12 +4,13 @@
 | ignore                     | 1  | --- | --  | 1  | --- | --  | V      | Ignore           | markup.ignore *                    | invisible *     | ?
 
 
-| text                       | 1  | ++  | ~   | 1  | --- | --  | N      | Normal           | markup                             | g *             | font-face??
+| text                       | 1  | ++  | -   | 1  | --- | --  | N      | Normal           | markup                             | g *             | font-face??
 | text.whitespace            | <  | <   | <   | <' | <-  | <-  | N      | Whitespace       | markup.whitespace *                | w               | ?
 | text.deleted               | <' | --  | <-  | <  | <   | <   | X      | TextDeleted      | markup.deleted *                   | gd              | ?
 | text.inserted              | <' | <+  | <+  | <  | <   | <   | N      | TextInserted     | markup.inserted *                  | gi              | ?
 | text.emphasis              | <  | <   | <   | <  | <   | <   | I      | TextEmphasis     | markup.italic                      | ge              | ?
 | text.strong                | <  | <   | <   | <  | <   | <   | B      | TextStrong       | markup.bold                        | gs              | ?
+| text.title                 | <' | <   | <   | <  | <   | <   | U'     | Title            | ?????                              | ??????          | ???????
 | text.heading               | <' | <+  | <+  | <  | <   | <   | U'I'B' | TextHeading      | markup.heading                     | gh              | ?
 | text.subheading            | <' | <+  | <   | <  | <   | <   | U'I'B' | TextSubheading   | markup.heading.2                   | gu              | ?
 | text.output                | <' | <   | <   | <  | <   | <   | N      | TextOutput       | markup.output *                    | go              | ?
@@ -27,7 +28,7 @@
 
 
 | lit                        | 2  | ++  | ~   | 1  | --- | --  | N      | ?                | ?                                  | ?               | ?
-| lit.string                 | <' | <   | <   | <  | <   | <   | N      | String           | string                             | s               | string-face
+| lit.string                 | <''| <   | <   | <  | <   | <   | N      | String           | string                             | s               | string-face
 | lit.string.heredoc         | <' | <   | <   | <  | <   | <   | N      | ?                | string.unquoted                    | sh              | ? 
 | lit.string.quoted          | <' | <   | <   | <  | <   | <   | N      | ?                | string.quoted                      | sx              | ? 
 | lit.string.quoted.double   | <' | <   | <   | <  | <   | <   | N      | ?                | string.quoted.double               | s2              | ? 
@@ -35,31 +36,31 @@
 | lit.string.quoted.backtick | <' | <   | <   | <  | <   | <   | N      | ?                | string.quoted.backtick *           | sb              | ? 
 | lit.string.interpolated    | <' | <   | <   | <  | <-  | <+  | N      | ?                | string.interpolated                | si              | ? 
 | lit.string.regexp          | <' | <   | <   | <  | <   | <   | N      | ?                | string.regexp                      | sr              | ? 
-| lit.string.char            | <' | <   | <   | <  | <   | <   | N      | Character        | constant.character                 | sc              | ? 
+| lit.string.char            | <''| <   | <   | <  | <   | <   | N      | Character        | constant.character                 | sc              | ? 
 | lit.string.char.esc        | 2' | <   | <+  | <  | <   | <   | U'     | SpecialChar      | constant.character.escape          | se              | ?
 | lit.string.char.esc.unicode| <' | <   | <   | <  | <   | <   | U'     | ?                | constant.character.escape.unicode *| ?               | ?
 | lit.string.char.esc.hex    | <' | <   | <   | <  | <   | <   | U'     | ?                | constant.character.escape.hex *    | ?               | ?
 | lit.string.char.esc.oct    | <' | <   | <   | <  | <   | <   | U'     | ?                | constant.character.escape.oct *    | ?               | ?
 
 | lit.number                 | 3  | ++  | ~   | 1  | --- | --  | N      | Number           | constant.numeric                   | m               | ?
-| lit.number.int             | <' | <   | <   | <  | <   | <   | N      | ?                | constant.numeric.integer *         | mi              | ?
+| lit.number.int             | <''| <   | <   | <  | <   | <   | N      | ?                | constant.numeric.integer *         | mi              | ?
 #| lit.number.int.hex         | <' | <   | <   | <  | <   | <   | N      | ?                | constant.numeric.integer
 #| lit.number.int.oct         | <' | <   | <   | <  | <   | <   | N      | ?                |
 #| lit.number.int.binary
 | lit.number.int.long        | <' | <   | <   | <  | <   | <   | N      | ?                | constant.numeric.integer.long *    | il              | ?
 | lit.number.float           | <' | <   | <   | <  | <   | <   | N      | Float            | constant.numeric.float *           | mf              | ?
 
-| lit.boolean                | 3' | ++  | ~   | 1  | --- | --  | N      | Boolean          | ???? | ???? | ????
-| lit.constant               | 3' | ++  | -   | 1  | --- | --  | N      | Constant         | ???? | ???? | ????
+| lit.boolean                | 3''| ++  | ~   | 1  | --- | --  | N      | Boolean          | ???? | ???? | ????
+| lit.constant               | 3''| ++  | -   | 1  | --- | --  | N      | Constant         | ???? | ???? | ????
 
 | variable                   | 4  | ++  | ~   | 1  | --- | --  | N      | Identifier       | ???? | ???? | ????
-| function                   | 4' | ++  | ~   | 1  | --- | --  | N      | Function         | ???? | ???? | ????
+| function                   | 4''| ++  | ~   | 1  | --- | --  | N      | Function         | ???? | ???? | ????
 | statement                  | 5  | ++  | ~   | 1  | --- | --  | N      | Statement        | ???? | ???? | ????
-| statement.conditional      | <' | <   | <   | <  | <   | <   | N      | Conditional      | ???? | ???? | ????
-| statement.repeat           | <' | <   | <   | <  | <   | <   | N      | Repeat           | ???? | ???? | ????
-| statement.label            | <' | <   | <   | <  | <   | <   | U'     | Label            | ???? | ???? | ????
-| statement.operator         | <' | <   | <   | <  | <   | <   | N      | Operator         | ???? | ???? | ????
-| statement.keyword          | <' | <   | <   | <  | <   | <   | N      | Keyword          | ???? | ???? | ????
+| statement.conditional      | <''| <   | <   | <  | <   | <   | N      | Conditional      | ???? | ???? | ????
+| statement.repeat           | <''| <   | <   | <  | <   | <   | N      | Repeat           | ???? | ???? | ????
+| statement.label            | <''| <   | <   | <  | <   | <   | U'     | Label            | ???? | ???? | ????
+| statement.operator         | <''| <   | <   | <  | <   | <   | N      | Operator         | ???? | ???? | ????
+| statement.keyword          | <''| <   | <   | <  | <   | <   | N      | Keyword          | ???? | ???? | ????
 
 | control.exception          | 6  | ++  | ~   | 1  | ++  | +   | N      | Exception        | ???? | ???? | ????
 
@@ -71,9 +72,9 @@
 #| preproc.shebang            | 
 
 | type                       | 8  | ++  | ~   | 1  | --- | --  | N      | Type             | ???? | ???? | ????
-| type.storageclass          | <' | <   | <   | <  | <   | <   | N      | StorageClass     | ???? | ???? | ????
-| type.structure             | <' | <   | <   | <  | <   | <   | N      | Structure        | ???? | ???? | ????
-| type.typedef               | <' | <   | <   | <  | <   | <   | N      | Typedef          | ???? | ???? | ????
+| type.storageclass          | <''| <   | <   | <  | <   | <   | N      | StorageClass     | ???? | ???? | ????
+| type.structure             | <''| <   | <   | <  | <   | <   | N      | Structure        | ???? | ???? | ????
+| type.typedef               | <''| <   | <   | <  | <   | <   | N      | Typedef          | ???? | ???? | ????
 
 
 | delimiter                  | 9  | -   | --  | 1  | --- | --  | N      | Delimiter        | ???? | ???? | ????
@@ -89,7 +90,7 @@
 
 | ui                         | 1  | ++  | ~   | 1  | --- | --  | N      | ?                | ???? | ???? | ????
 | ui.linenumbers             | 1  | ~   | --  | 1  | --- | --- | N      | LineNR           | ???? | ???? | ????
-| ui.visual                  | 1' | ++  | ~   | 1' | --  | -   | N      | Visual           | ???? | ???? | ????
+| ui.visual                  | 1  | +++ | +   | 1  | -   | -   | N      | Visual           | ???? | ???? | ????
 
 
 # Special

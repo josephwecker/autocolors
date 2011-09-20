@@ -1,9 +1,0 @@
-- Fix highlight color so it's more coherent
-- Fix TODO / etc. so they're more coherent
-- Change mapping a bit so that one tick is very small variation, and more ticks
-  increase but linearly, and use more ticks in most places.
-- Integrate with http://bashish.sourceforge.net/ ?
-- Script to help others quickly generate "detailed" syntax highlight versions
-  of their favorite syntaxes. (gives them a quick list of all the things they
-  can map, then they map them against the autocolors heirarchy and it generates
-  the final product).

@@ -15,15 +15,16 @@ module AutoColors
     end
 
     def generate
-      bc = nrand(-1,2,-4,5)
+      bc = nrand(-1.0,1.5,-4.0,5.5)
       sat = rand * 2.0
       @contrast = bc    # Value between -4.0 and 5.0 used to contract/spread out intensity values
       @saturation = sat # Value between 0.0 and 2.0 used to contract/intensify color values
 
-      @intensity = [00-(bc*3), 20-(bc*2), 45-bc, 50, 60, 65+bc, 90+(bc*2), 110+(bc*3)]
-      @fcolor = [0.0, 0.1*sat, 0.2*sat, 0.4*sat, 0.8*sat, 1.6*sat, 3.2*sat, 6.4*sat]
+      #@intensity = [0.0-(bc*3.0), 20.0-(bc*2.0), 45.0-bc, 50.0, 60.0, 65.0+bc, 90.0+(bc*2.0), 110.0+(bc*3.0)]
+      @intensity = [[3.0 - (bc*3.0),0].max, 20.0-(bc*2.0), 45.0-bc, 50.0, 60.0, 65.0+bc, 90.0+(bc*2.0), 110.0+(bc*3.0)]
+      @fcolor = [0.0, 0.1*sat, 0.5*sat, 1.0*sat, 1.5*sat, 2.0*sat, 2.5*sat, 3.0*sat]
 
-      @base_colors = (1..10).map{|i| [nrand(0.0, 100.0, -120.0, 120.0), nrand(0.0,100.0,-120.0,120.0), 1]}
+      @base_colors = (1..10).map{|i| [nrand(0.0, 70.0, -120.0, 120.0), nrand(0.0,70.0,-120.0,120.0), 1]}
       do_concrete_mapping
     end
 
@@ -41,10 +42,10 @@ module AutoColors
         ddat = entry.data.dup
         fg_a, fg_b, _ = @base_colors[ldat[:fg_idx]]
         bg_a, bg_b, _ = @base_colors[ldat[:bg_idx]]
-        ldat[:fg] = lab(light_i(ldat[:fg_intensity]), ldat[:fg_saturation], fg_a, fg_b)
-        ldat[:bg] = lab(light_i(ldat[:bg_intensity]), ldat[:bg_saturation], bg_a, bg_b)
-        ddat[:fg] = lab( dark_i(ldat[:fg_intensity]), ldat[:fg_saturation], fg_a, fg_b)
-        ddat[:bg] = lab( dark_i(ldat[:bg_intensity]), ldat[:bg_saturation], bg_a, bg_b)
+        ldat[:fg] = lab(light_i(ldat[:fg_intensity]), light_s(ldat[:fg_saturation]), fg_a, fg_b)
+        ldat[:bg] = lab(light_i(ldat[:bg_intensity]), light_s(ldat[:bg_saturation]), bg_a, bg_b)
+        ddat[:fg] = lab( dark_i(ldat[:fg_intensity]),  dark_s(ldat[:fg_saturation]), fg_a, fg_b)
+        ddat[:bg] = lab( dark_i(ldat[:bg_intensity]),  dark_s(ldat[:bg_saturation]), bg_a, bg_b)
         @dark[name] = ddat
         @light[name] = ldat
       end
@@ -81,29 +82,31 @@ module AutoColors
       c_plus   = entry.data[k].count('+')
       c_minus  = entry.data[k].count('-')
       c_neut   = entry.data[k].count('~')
+      val = 0
       if c_parent == 0
-        entry.data[k] = 3 - c_minus + c_plus
+        val = 3 - c_minus + c_plus
       else
         concrete_lvl(entry.parent, k)
         offset = entry.parent.data[k]
-        entry.data[k] = offset + c_plus - c_minus
+        val = offset + c_plus - c_minus
       end
+      entry.data[k] = [[val,7].min,0].max
     end
 
     def concrete_style(entry)
       entry.data[:styles] = 'NONE'
     end
 
-    def dark_i(idx) idx end
-    def light_i(idx) 7 - idx end
+    def dark_i(idx) @intensity[idx] end
+    def light_i(idx) @intensity[7 - idx] - 0.005  end
+    def dark_s(idx) @fcolor[idx] end
+    def light_s(idx) @fcolor[idx] + 0.01 end
   
-    def lab(intensity, saturation, a, b)
-      Color.new([@intensity[intensity], a * @fcolor[saturation], b * @fcolor[saturation]])
-    end
+    def lab(intensity,saturation,a,b) Color.new([intensity, a * saturation, b * saturation]) end
 
     def new_color(base_idx, diff_level, depth)
       a,b,count = @base_colors[base_idx]
-      base_diff = (diff_level.to_f + 1.0) * 10.0 / ((depth.to_f + 1.0) / 2.0) * count.to_f
+      base_diff = (diff_level.to_f + 1.0) * 4.0 / ((depth.to_f + 1.0) / 2.0) * count.to_f
       a_dir = rand(2) == 1 ? -1.0 : 1.0
       b_dir = rand(2) == 1 ? -1.0 : 1.0
       a_p = a + (base_diff * a_dir)

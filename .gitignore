@@ -1,3 +1,6 @@
+.samples/html
+.samples/repos
+
 # rcov generated
 coverage
 
