@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "autocolors"
-  s.version = "0.0.2"
+  s.version = "0.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Joseph Wecker"]
@@ -87,6 +87,7 @@ Gem::Specification.new do |s|
     "lib/autocolors/templates/colorscheme.erb.vim",
     "notes",
     "quicktest.html",
+    "quicktest_old.html",
     "test/helper.rb",
     "test/swatch.erb",
     "test/test_autocolors.rb"
