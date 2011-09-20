@@ -49,6 +49,24 @@ module AutoColors
     def g=(v)   @rgb_dirty=true; @g=v.to_f                    end
     def b=(v)   @rgb_dirty=true; @b=v.to_f                    end
 
+    # Hue & chroma
+    def hue;    rad2turns(Math.atan2(ca, cb))                 end
+    def chroma; Math::sqrt((ca * ca) + (cb * cb))             end
+
+    def hue=(v)
+      r = turns2rad(v.to_f)
+      c = chroma
+      self.ca = Math::sin(r) * c
+      self.cb = Math::cos(r) * c
+    end
+
+    def chroma=(v)
+      q = Math.atan2(ca, cb)
+      v = v.to_f
+      self.ca = Math::sin(q) * v
+      self.cb = Math::cos(q) * v
+    end
+
     def to_s
       '#' + rgb.map{|v|v.to_s(16).rjust(2,'0')}.join('')
     end
@@ -57,7 +75,7 @@ module AutoColors
       if c.is_a?(Color)
         # Euclidean distance in 3 dimensions, but emphasize brightness a bit
         # more than the color (which is more how the human eye works)
-        ((cl*2.5 - c.cl*2.5)**2 + (ca - c.ca)**2 + (cb - c.cb)**2)**0.5
+        Math.sqrt((cl*2.5 - c.cl*2.5)**2 + (ca - c.ca)**2 + (cb - c.cb)**2)
       end
     end
 
@@ -101,6 +119,9 @@ module AutoColors
       elsif v > 255 then @rgb_approx = true; 255
       else v end
     end
+
+    def rad2turns(r) (r + Math::PI) / (2.0 * Math::PI) end
+    def turns2rad(t) (t * 2.0 * Math::PI) - Math::PI end
   end
 
   # Primary 3-bit (8 colors). Unique representation!
