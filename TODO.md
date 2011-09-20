@@ -1,8 +1,9 @@
-- [ ] A real good sample syntax/document with "common" densities for displaying full colorsheme - both standard and extended.
-- [ ] Autogenerate some vim examples in order to test colorschemes generally for iterating
+
+- [~] Change mapping a bit so that one tick is very small variation, and more ticks increase but linearly, and use more ticks in most places.
 - [ ] Fix highlight color so it's more coherent
 - [ ] Fix TODO / etc. so they're more coherent
-- [~] Change mapping a bit so that one tick is very small variation, and more ticks increase but linearly, and use more ticks in most places.
+- [ ] Set initial colors so they have the same chromacity and somewhat distributed hue
+
 - [ ] Fix vim "~"-line background color so it's only very slightly different from normal background.
 - [ ] Heroku site for showing it off / generating them online
 - [ ] Indicate frequency and average sizes in mapping - for use in constraints
@@ -16,3 +17,7 @@
 - [ ] Blog entry
 - [ ] Announce
 - [ ] Script to help others quickly generate "detailed" syntax highlight versions of their favorite syntaxes. (gives them a quick list of all the things they can map, then they map them against the autocolors heirarchy and it generates the final product).
+
+- [D] A real good sample syntax/document with "common" densities for displaying full colorsheme - both standard and extended.
+- [D] Autogenerate some vim examples in order to test colorschemes generally for iterating
+
