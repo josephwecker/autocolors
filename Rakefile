@@ -93,7 +93,7 @@ end
 namespace :samples do
   require 'pp'
   desc 'Generate html syntax highlighting samples for pieces of popular opensource'
-  task :generate => [:update_repositories, :generate_colorschemes, :generate_html]
+  task :generate => [:update_repositories, 'colors:regenerate', :generate_html]
 
   $sample_files = {}
   task :update_repositories do
@@ -137,16 +137,46 @@ namespace :samples do
     Dir.chdir currentd
   end
 
+
   $sample_colorschemes = []
-  task :generate_colorschemes do
-    currentd = Dir.pwd
-    mkdir_p './.samples/vim/colors'
-    Dir.chdir './.samples/vim/colors'
-    `rm * 2>/dev/null`
-    (1..25).each{ `/bin/bash -c '../../../bin/autocolors'` }
-    $sample_colorschemes = `ls *.vim`.strip.split(/\s+/).map{|c| c.strip[0..-5]}
-    pp $sample_colorschemes
-    Dir.chdir currentd
+  namespace :colors do
+    task :clear do
+      currentd = Dir.pwd
+      mkdir_p './.samples/vim/colors'
+      Dir.chdir './.samples/vim/colors'
+      `rm * 2>/dev/null`
+      Dir.chdir currentd
+    end
+
+    task :generate do
+      currentd = Dir.pwd
+      mkdir_p './.samples/vim/colors'
+      Dir.chdir './.samples/vim/colors'
+      (1..25).each{ `/bin/bash -c '../../../bin/autocolors'` }
+      Dir.chdir currentd
+    end
+
+    task :regenerate => :gather do
+      $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), 'lib'))
+      require 'autocolors'
+      currentd = Dir.pwd
+      mkdir_p './.samples/vim/colors'
+      Dir.chdir './.samples/vim/colors'
+      $sample_colorschemes.each do |cs|
+        colorfile = AutoColors::generate_vim_colors(cs)
+        File.open(cs + '.vim','w+'){|f| f.write(colorfile)}
+      end
+      Dir.chdir currentd
+    end
+
+    task :gather do
+      currentd = Dir.pwd
+      mkdir_p './.samples/vim/colors'
+      Dir.chdir './.samples/vim/colors'
+      $sample_colorschemes = `ls *.vim`.strip.split(/\s+/).map{|c| c.strip[0..-5]}
+      pp $sample_colorschemes
+      Dir.chdir currentd
+    end
   end
 
   task :generate_html do
@@ -156,26 +186,28 @@ namespace :samples do
     Dir.chdir './.samples/html'
     `rm *.html *.pre`
     prefiles = []
-    $sample_files.each do |lang, locs|
-      gh_loc, f_loc = locs
-      $sample_colorschemes.each do |cs|
-        ['dark','light'].each do |bg|
+    instructions = []
+    $sample_colorschemes.each do |cs|
+      instructions << "colorscheme #{cs}"
+      ['dark','light'].each do |bg|
+        instructions << "set background=#{bg}"
+        $sample_files.each do |lang, locs|
+          gh_loc, f_loc = locs
           dest_fname = "./#{cs}-#{friendlyname(lang)}-#{bg}.html"
-          precmds  = ["set runtimepath+=../../.samples/vim/",
-                      "set background=#{bg}",
-                      "colorscheme #{cs}"]
-          postcmds = ["TOhtml",
-                      "w #{dest_fname}.pre",
-                      "qa!"]
-          precmds = precmds.map{|c| "--cmd '#{c}'"}.join(' ')
-          postcmds = postcmds.map{|c| "-c '#{c}'"}.join(' ')
-          cmd = "gvim -i NONE -f -n -g -b -N --noplugin #{precmds} -u '#{vimrc}' '#{f_loc}' #{postcmds}"
-          `#{cmd}`
           prefiles << ["#{dest_fname}.pre", gh_loc, bg, cs]
-
+          instructions << "e #{f_loc}"
+          instructions << "TOhtml"
+          instructions << "w! #{dest_fname}.pre"
+          instructions << "q!"
         end
       end
     end
+    File.open('tmp_i.vim','w+'){|f| f.write(instructions.join("\n"))}
+    cmd = "gvim -i NONE -f -n -g -b -N --noplugin " +
+          "--cmd 'set runtimepath+=../../.samples/vim/' " +
+          "-u '#{vimrc}' -S tmp_i.vim -c qa!"
+    $stderr.puts cmd
+    `#{cmd}`
     prefiles.each do |destf, gh_loc, bg, cs|
       txt = IO.read(destf)
       bg_base = '#333'
