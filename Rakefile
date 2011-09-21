@@ -195,7 +195,7 @@ namespace :samples do
           gh_loc, f_loc = locs
           dest_fname = "./#{cs}-#{friendlyname(lang)}-#{bg}.html"
           prefiles << ["#{dest_fname}.pre", gh_loc, bg, cs]
-          instructions << "e #{f_loc}"
+          instructions << "e #{f_loc.gsub(' ','\\ ')}"
           instructions << "TOhtml"
           instructions << "w! #{dest_fname}.pre"
           instructions << "q!"
