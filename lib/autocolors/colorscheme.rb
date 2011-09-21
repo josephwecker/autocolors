@@ -15,16 +15,34 @@ module AutoColors
     end
 
     def generate
-      bc = nrand(-1.0,1.5,-4.0,5.5)
-      sat = rand * 2.0
-      @contrast = bc    # Value between -4.0 and 5.0 used to contract/spread out intensity values
-      @saturation = sat # Value between 0.0 and 2.0 used to contract/intensify color values
+      # OVERALL CONTRAST: Value between 0.75 and 1.0 used to contract/spread
+      # out intensity values.
+      @contrast =     nrand(0.95, 0.1, 0.75,  1.1)
+      # OVERALL CHROMACITY: Value between 0.0 and 1.0 used to
+      # contract/intensify colorfulness
+      @chromacity =   nrand(0.7,  0.1,  0.0,  1.0)
+      # OVERALL COLORFULNESS: Value between 0.3 and 1.0 determining how many
+      # hues overall end up in the colorscheme
+      @colorfulness = nrand(0.6,  0.4,  0.3,  1.0)
 
-      #@intensity = [0.0-(bc*3.0), 20.0-(bc*2.0), 45.0-bc, 50.0, 60.0, 65.0+bc, 90.0+(bc*2.0), 110.0+(bc*3.0)]
-      @intensity = [[3.0 - (bc*3.0),0].max, 20.0-(bc*2.0), 45.0-bc, 50.0, 60.0, 65.0+bc, 90.0+(bc*2.0), 110.0+(bc*3.0)]
-      @fcolor = [0.0, 0.1*sat, 0.5*sat, 1.0*sat, 1.5*sat, 2.0*sat, 2.5*sat, 3.0*sat]
+      @intensity = rand_seq(0.0, 110.0, 8, @contrast)
+      @fcolor = (0..7).map {|i| i.to_f / 7.0 * 100.0 * Math.sqrt(2.0) * @chromacity }
 
-      @base_colors = (1..10).map{|i| [nrand(0.0, 80.0, -100.0, 100.0), nrand(5.0,80.0,-100.0,100.0), 1]}
+      hues = rand_seq(0.0, 1.0, 10, @colorfulness).shuffle
+      @base_colors = hues.map do |h|
+        c = Color.new([50, 10, 10])
+        c.hue = h
+        [c.ca, c.cb, 1]
+      end
+
+      require 'pp'
+      puts "Intensity"
+      pp @intensity
+      puts "Chromacity"
+      pp @fcolor
+      puts "Base Colors"
+      pp @base_colors
+
       do_concrete_mapping
     end
 
@@ -97,14 +115,40 @@ module AutoColors
       entry.data[:styles] = 'NONE'
     end
 
-    def dark_i(idx) @intensity[idx] end
-    def light_i(idx) @intensity[7 - idx] - 0.005  end
-    def dark_s(idx) @fcolor[idx] end
-    def light_s(idx) @fcolor[idx] + 0.01 end
+    def dark_i(idx)  @intensity[idx]     end
+    def light_i(idx) @intensity[7 - idx] end
+    def dark_s(idx)  @fcolor[idx]        end
+    def light_s(idx) @fcolor[idx]        end
   
-    def lab(intensity,saturation,a,b) Color.new([intensity, a * saturation, b * saturation]) end
+    def lab(intensity, chroma, a, b)
+      c = Color.new([intensity, a, b])
+      c.chroma = chroma
+      return c
+    end
 
     def new_color(base_idx, diff_level, depth)
+      # TODO: Use actual mapping metrics for very even spread
+      a, b, count = @base_colors[base_idx]
+      c = Color.new([50, a, b])
+      current_hue = c.hue
+      diff_level = diff_level.to_f  # Usually 1 or 2 - from prime marks
+      depth = depth.to_f            # Usually 1, less frequently 2, 3, to 5...
+      count = count.to_f            # How many others already based off of the same parent
+      direction = rand(2) == 1 ? -1.0 : 1.0
+      maxdiff = @colorfulness * (1.0 / @base_colors.size) / 1.5 # allocated roughly per major color group
+      cdiff = direction * (maxdiff / 4.0) * depth # depth "depth-groups" away from current in random direction
+      cdiff += direction * (maxdiff / 4.0 / 5.0) * count # adjusted some more to avoid collisions
+      cdiff += current_hue
+      cdiff = 1.0 + cdiff if cdiff < 0.0
+      cdiff = cdiff - 1.0 if cdiff > 1.0
+      c.hue = cdiff
+      new_idx = @base_colors.size
+      @base_colors[new_idx] = [c.ca, c.cb, 1]
+      @base_colors[base_idx][2] += 1
+      return new_idx
+    end
+
+    def new_color_old(base_idx, diff_level, depth)
       a,b,count = @base_colors[base_idx]
       base_diff = (diff_level.to_f + 1.0) * 4.0 / ((depth.to_f + 1.0) / 2.0) * count.to_f
       a_dir = rand(2) == 1 ? -1.0 : 1.0
@@ -131,5 +175,24 @@ module AutoColors
       return res
     end
     
+    def rand_seq(min, max, points, contraction=1.0)
+      max = max.to_f; min = min.to_f; contraction = contraction.to_f
+      spread = max - min
+      base_step = spread / (points.to_f - 1.0) * contraction
+      curr = 0.0
+      res = [curr]
+      while res.size < points
+        curr += nrand(base_step, base_step / 2.0, base_step / 3.0, base_step * 3.0)
+        res << curr
+      end
+      if curr > spread
+        factor = spread / curr
+        res.map!{|v| factor * v}
+      else
+        offset = (spread - curr) * rand
+        res.map!{|v| offset + v}
+      end
+      return res.map{|v| v + min}
+    end
   end
 end
