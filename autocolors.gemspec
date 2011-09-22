@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "autocolors"
-  s.version = "0.0.3"
+  s.version = "0.0.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Joseph Wecker"]
-  s.date = "2011-09-20"
+  s.date = "2011-09-22"
   s.description = "Inspired by solarized, and lots of work with various colorschemes and syntax highlight files, and driven by a need to have some color variety that doesn't stink. Tries to generate colorschemes with just the right contrast, variety, and coherence."
   s.email = "joseph.wecker@gmail.com"
   s.executables = ["autocolors"]
@@ -19,7 +19,9 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".attic/colors.rb",
+    ".attic/colorscheme-v3.old.rb",
     ".attic/colorscheme.rb",
+    ".attic/colorschemes.old.rb",
     ".attic/format-samples/1/Sweyla866607.css",
     ".attic/format-samples/1/Sweyla866607.tmTheme",
     ".attic/format-samples/1/Sweyla866607.txt",
@@ -81,13 +83,13 @@ Gem::Specification.new do |s|
     "lib/autocolors.rb",
     "lib/autocolors/color.rb",
     "lib/autocolors/colorscheme.rb",
-    "lib/autocolors/colorschemes.old.rb",
     "lib/autocolors/mapping.rb",
     "lib/autocolors/mapping.udon",
     "lib/autocolors/templates/colorscheme.erb.vim",
     "notes",
     "quicktest.html",
     "quicktest_old.html",
+    "quicktest_old2.html",
     "test/helper.rb",
     "test/swatch.erb",
     "test/test_autocolors.rb"
