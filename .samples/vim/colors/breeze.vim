@@ -19,282 +19,282 @@ let g:colors_name = 'breeze'
 if has("gui_running") || &t_Co > 16
   if &background == "light"
     hi NonText cterm=NONE gui=NONE
-    hi NonText ctermbg=52 ctermfg=234
-    hi NonText guifg=#007186 guibg=#c7ffff
+    hi NonText ctermbg=52 ctermfg=233
+    hi NonText guifg=#005558 guibg=#b5ffff
     hi Ignore cterm=NONE gui=NONE
     hi Ignore ctermbg=52 ctermfg=52
     hi Ignore guifg=#ffffff guibg=#ffffff
     hi Normal cterm=NONE gui=NONE
-    hi Normal ctermbg=52 ctermfg=234
-    hi Normal guifg=#326d79 guibg=#ffffff
+    hi Normal ctermbg=52 ctermfg=233
+    hi Normal guifg=#005151 guibg=#ffffff
     hi Whitespace cterm=NONE gui=NONE
-    hi Whitespace ctermbg=52 ctermfg=234
-    hi Whitespace guifg=#326d79 guibg=#ffffff
+    hi Whitespace ctermbg=52 ctermfg=233
+    hi Whitespace guifg=#005151 guibg=#ffffff
     hi TextDeleted cterm=NONE gui=NONE
     hi TextDeleted ctermbg=52 ctermfg=52
-    hi TextDeleted guifg=#ffffff guibg=#ffffff
+    hi TextDeleted guifg=#f1fef5 guibg=#ffffff
     hi TextInserted cterm=NONE gui=NONE
     hi TextInserted ctermbg=52 ctermfg=0
-    hi TextInserted guifg=#001d36 guibg=#ffffff
+    hi TextInserted guifg=#001e1d guibg=#ffffff
     hi TextEmphasis cterm=NONE gui=NONE
-    hi TextEmphasis ctermbg=52 ctermfg=234
-    hi TextEmphasis guifg=#326d79 guibg=#ffffff
+    hi TextEmphasis ctermbg=52 ctermfg=233
+    hi TextEmphasis guifg=#005151 guibg=#ffffff
     hi TextStrong cterm=NONE gui=NONE
-    hi TextStrong ctermbg=52 ctermfg=234
-    hi TextStrong guifg=#326d79 guibg=#ffffff
+    hi TextStrong ctermbg=52 ctermfg=233
+    hi TextStrong guifg=#005151 guibg=#ffffff
     hi Title cterm=NONE gui=NONE
-    hi Title ctermbg=52 ctermfg=234
-    hi Title guifg=#306e75 guibg=#ffffff
+    hi Title ctermbg=52 ctermfg=233
+    hi Title guifg=#00514b guibg=#ffffff
     hi TextHeading cterm=NONE gui=NONE
     hi TextHeading ctermbg=52 ctermfg=0
-    hi TextHeading guifg=#001d37 guibg=#ffffff
+    hi TextHeading guifg=#001e2c guibg=#ffffff
     hi TextSubheading cterm=NONE gui=NONE
     hi TextSubheading ctermbg=52 ctermfg=0
-    hi TextSubheading guifg=#001a2b guibg=#ffffff
+    hi TextSubheading guifg=#001c24 guibg=#ffffff
     hi TextOutput cterm=NONE gui=NONE
-    hi TextOutput ctermbg=52 ctermfg=234
-    hi TextOutput guifg=#356c7e guibg=#ffffff
+    hi TextOutput ctermbg=52 ctermfg=233
+    hi TextOutput guifg=#005157 guibg=#ffffff
     hi Comment cterm=NONE gui=NONE
     hi Comment ctermbg=52 ctermfg=52
-    hi Comment guifg=#d0dadb guibg=#ffffff
+    hi Comment guifg=#aabcbb guibg=#ffffff
     hi CommentInline cterm=NONE gui=NONE
     hi CommentInline ctermbg=52 ctermfg=52
-    hi CommentInline guifg=#cfdada guibg=#ffffff
+    hi CommentInline guifg=#aabcb9 guibg=#ffffff
     hi CommentBlock cterm=NONE gui=NONE
     hi CommentBlock ctermbg=52 ctermfg=52
-    hi CommentBlock guifg=#cfdada guibg=#ffffff
+    hi CommentBlock guifg=#aabcb9 guibg=#ffffff
     hi SpecialComment cterm=NONE gui=NONE
     hi SpecialComment ctermbg=52 ctermfg=52
-    hi SpecialComment guifg=#9dcdd8 guibg=#ffffff
+    hi SpecialComment guifg=#67a8af guibg=#ffffff
     hi Todo cterm=NONE gui=NONE
-    hi Todo ctermbg=52 ctermfg=234
-    hi Todo guifg=#007187 guibg=#ffffff
+    hi Todo ctermbg=52 ctermfg=233
+    hi Todo guifg=#005557 guibg=#ffffff
     hi String cterm=NONE gui=NONE
-    hi String ctermbg=52 ctermfg=234
-    hi String guifg=#48659d guibg=#ffffff
+    hi String ctermbg=52 ctermfg=233
+    hi String guifg=#005430 guibg=#ffffff
     hi Character cterm=NONE gui=NONE
-    hi Character ctermbg=52 ctermfg=234
-    hi Character guifg=#52629c guibg=#ffffff
+    hi Character ctermbg=52 ctermfg=233
+    hi Character guifg=#00542a guibg=#ffffff
     hi SpecialChar cterm=NONE gui=NONE
-    hi SpecialChar ctermbg=52 ctermfg=234
-    hi SpecialChar guifg=#006ab1 guibg=#ffffff
+    hi SpecialChar ctermbg=52 ctermfg=233
+    hi SpecialChar guifg=#00582f guibg=#ffffff
     hi Number cterm=NONE gui=NONE
-    hi Number ctermbg=52 ctermfg=234
-    hi Number guifg=#43703b guibg=#ffffff
+    hi Number ctermbg=52 ctermfg=233
+    hi Number guifg=#004984 guibg=#ffffff
     hi Float cterm=NONE gui=NONE
-    hi Float ctermbg=52 ctermfg=234
-    hi Float guifg=#3f703e guibg=#ffffff
+    hi Float ctermbg=52 ctermfg=233
+    hi Float guifg=#084884 guibg=#ffffff
     hi Boolean cterm=NONE gui=NONE
-    hi Boolean ctermbg=52 ctermfg=234
-    hi Boolean guifg=#40703d guibg=#ffffff
+    hi Boolean ctermbg=52 ctermfg=233
+    hi Boolean guifg=#004884 guibg=#ffffff
     hi Constant cterm=NONE gui=NONE
-    hi Constant ctermbg=52 ctermfg=234
-    hi Constant guifg=#526c49 guibg=#ffffff
+    hi Constant ctermbg=52 ctermfg=233
+    hi Constant guifg=#2c486e guibg=#ffffff
     hi Identifier cterm=NONE gui=NONE
-    hi Identifier ctermbg=52 ctermfg=235
-    hi Identifier guifg=#a34566 guibg=#ffffff
+    hi Identifier ctermbg=52 ctermfg=234
+    hi Identifier guifg=#414c00 guibg=#ffffff
     hi Function cterm=NONE gui=NONE
-    hi Function ctermbg=52 ctermfg=235
-    hi Function guifg=#a34566 guibg=#ffffff
+    hi Function ctermbg=52 ctermfg=234
+    hi Function guifg=#414c00 guibg=#ffffff
     hi Statement cterm=NONE gui=NONE
-    hi Statement ctermbg=52 ctermfg=234
-    hi Statement guifg=#00735f guibg=#ffffff
+    hi Statement ctermbg=52 ctermfg=233
+    hi Statement guifg=#5b3777 guibg=#ffffff
     hi Conditional cterm=NONE gui=NONE
-    hi Conditional ctermbg=52 ctermfg=234
-    hi Conditional guifg=#00735d guibg=#ffffff
+    hi Conditional ctermbg=52 ctermfg=233
+    hi Conditional guifg=#593879 guibg=#ffffff
     hi Repeat cterm=NONE gui=NONE
-    hi Repeat ctermbg=52 ctermfg=234
-    hi Repeat guifg=#007361 guibg=#ffffff
+    hi Repeat ctermbg=52 ctermfg=233
+    hi Repeat guifg=#5e3676 guibg=#ffffff
     hi Label cterm=NONE gui=NONE
-    hi Label ctermbg=52 ctermfg=234
-    hi Label guifg=#00735d guibg=#ffffff
+    hi Label ctermbg=52 ctermfg=233
+    hi Label guifg=#5e3676 guibg=#ffffff
     hi Operator cterm=NONE gui=NONE
-    hi Operator ctermbg=52 ctermfg=234
-    hi Operator guifg=#007362 guibg=#ffffff
+    hi Operator ctermbg=52 ctermfg=233
+    hi Operator guifg=#583879 guibg=#ffffff
     hi Keyword cterm=NONE gui=NONE
-    hi Keyword ctermbg=52 ctermfg=234
-    hi Keyword guifg=#00735d guibg=#ffffff
+    hi Keyword ctermbg=52 ctermfg=233
+    hi Keyword guifg=#5f3676 guibg=#ffffff
     hi PreProc cterm=NONE gui=NONE
-    hi PreProc ctermbg=52 ctermfg=234
-    hi PreProc guifg=#89518a guibg=#ffffff
+    hi PreProc ctermbg=52 ctermfg=233
+    hi PreProc guifg=#004984 guibg=#ffffff
     hi Include cterm=NONE gui=NONE
-    hi Include ctermbg=52 ctermfg=234
-    hi Include guifg=#8a5088 guibg=#ffffff
+    hi Include ctermbg=52 ctermfg=233
+    hi Include guifg=#004a84 guibg=#ffffff
     hi Define cterm=NONE gui=NONE
-    hi Define ctermbg=52 ctermfg=234
-    hi Define guifg=#87528b guibg=#ffffff
+    hi Define ctermbg=52 ctermfg=233
+    hi Define guifg=#004a84 guibg=#ffffff
     hi Macro cterm=NONE gui=NONE
-    hi Macro ctermbg=52 ctermfg=234
-    hi Macro guifg=#87528b guibg=#ffffff
+    hi Macro ctermbg=52 ctermfg=233
+    hi Macro guifg=#004884 guibg=#ffffff
     hi PreCondit cterm=NONE gui=NONE
-    hi PreCondit ctermbg=52 ctermfg=234
-    hi PreCondit guifg=#86528b guibg=#ffffff
+    hi PreCondit ctermbg=52 ctermfg=233
+    hi PreCondit guifg=#004a84 guibg=#ffffff
     hi Type cterm=NONE gui=NONE
-    hi Type ctermbg=52 ctermfg=235
-    hi Type guifg=#a64550 guibg=#ffffff
+    hi Type ctermbg=52 ctermfg=234
+    hi Type guifg=#842426 guibg=#ffffff
     hi StorageClass cterm=NONE gui=NONE
-    hi StorageClass ctermbg=52 ctermfg=235
-    hi StorageClass guifg=#a6464f guibg=#ffffff
+    hi StorageClass ctermbg=52 ctermfg=234
+    hi StorageClass guifg=#842327 guibg=#ffffff
     hi Structure cterm=NONE gui=NONE
-    hi Structure ctermbg=52 ctermfg=235
-    hi Structure guifg=#a6464f guibg=#ffffff
+    hi Structure ctermbg=52 ctermfg=234
+    hi Structure guifg=#842327 guibg=#ffffff
     hi Typedef cterm=NONE gui=NONE
-    hi Typedef ctermbg=52 ctermfg=235
-    hi Typedef guifg=#a64552 guibg=#ffffff
+    hi Typedef ctermbg=52 ctermfg=234
+    hi Typedef guifg=#842327 guibg=#ffffff
     hi Delimiter cterm=NONE gui=NONE
     hi Delimiter ctermbg=52 ctermfg=52
-    hi Delimiter guifg=#e0d4e6 guibg=#ffffff
+    hi Delimiter guifg=#e0abb5 guibg=#ffffff
     hi Debug cterm=NONE gui=NONE
-    hi Debug ctermbg=52 ctermfg=235
-    hi Debug guifg=#766500 guibg=#ebffff
+    hi Debug ctermbg=52 ctermfg=232
+    hi Debug guifg=#005a9a guibg=#cdffff
     hi Error cterm=NONE gui=NONE
-    hi Error ctermbg=52 ctermfg=235
-    hi Error guifg=#786400 guibg=#ebffff
+    hi Error ctermbg=52 ctermfg=232
+    hi Error guifg=#005a9c guibg=#cdffff
     hi LineNR cterm=NONE gui=NONE
     hi LineNR ctermbg=52 ctermfg=52
-    hi LineNR guifg=#bcc7cb guibg=#ffffff
+    hi LineNR guifg=#8ea29f guibg=#ffffff
     hi Visual cterm=NONE gui=NONE
     hi Visual ctermbg=52 ctermfg=0
-    hi Visual guifg=#001f3c guibg=#b2dfeb
+    hi Visual guifg=#00202b guibg=#86c4c1
   else
     hi NonText cterm=NONE gui=NONE
     hi NonText ctermbg=0 ctermfg=52
-    hi NonText guifg=#8ae5fa guibg=#001024
+    hi NonText guifg=#4fcac9 guibg=#001018
     hi Ignore cterm=NONE gui=NONE
     hi Ignore ctermbg=0 ctermfg=0
-    hi Ignore guifg=#000c11 guibg=#000c11
+    hi Ignore guifg=#000c0d guibg=#000c0d
     hi Normal cterm=NONE gui=NONE
     hi Normal ctermbg=0 ctermfg=52
-    hi Normal guifg=#b2dfeb guibg=#000c11
+    hi Normal guifg=#86c4c1 guibg=#000c0d
     hi Whitespace cterm=NONE gui=NONE
     hi Whitespace ctermbg=0 ctermfg=52
-    hi Whitespace guifg=#b2dfeb guibg=#0a0808
+    hi Whitespace guifg=#86c4c1 guibg=#0a0808
     hi TextDeleted cterm=NONE gui=NONE
     hi TextDeleted ctermbg=0 ctermfg=0
-    hi TextDeleted guifg=#00181b guibg=#000c11
+    hi TextDeleted guifg=#001917 guibg=#000c0d
     hi TextInserted cterm=NONE gui=NONE
     hi TextInserted ctermbg=0 ctermfg=52
-    hi TextInserted guifg=#cbffff guibg=#000c11
+    hi TextInserted guifg=#a4ffff guibg=#000c0d
     hi TextEmphasis cterm=NONE gui=NONE
     hi TextEmphasis ctermbg=0 ctermfg=52
-    hi TextEmphasis guifg=#b2dfeb guibg=#000c11
+    hi TextEmphasis guifg=#86c4c1 guibg=#000c0d
     hi TextStrong cterm=NONE gui=NONE
     hi TextStrong ctermbg=0 ctermfg=52
-    hi TextStrong guifg=#b2dfeb guibg=#000c11
+    hi TextStrong guifg=#86c4c1 guibg=#000c0d
     hi Title cterm=NONE gui=NONE
     hi Title ctermbg=0 ctermfg=52
-    hi Title guifg=#b0e0e6 guibg=#000c11
+    hi Title guifg=#88c4ba guibg=#000c0d
     hi TextHeading cterm=NONE gui=NONE
     hi TextHeading ctermbg=0 ctermfg=52
-    hi TextHeading guifg=#ccffff guibg=#000c11
+    hi TextHeading guifg=#9effff guibg=#000c0d
     hi TextSubheading cterm=NONE gui=NONE
     hi TextSubheading ctermbg=0 ctermfg=52
-    hi TextSubheading guifg=#efffff guibg=#000c11
+    hi TextSubheading guifg=#ccffff guibg=#000c0d
     hi TextOutput cterm=NONE gui=NONE
     hi TextOutput ctermbg=0 ctermfg=52
-    hi TextOutput guifg=#b5def0 guibg=#000c11
+    hi TextOutput guifg=#85c3c8 guibg=#000c0d
     hi Comment cterm=NONE gui=NONE
-    hi Comment ctermbg=0 ctermfg=234
-    hi Comment guifg=#56686b guibg=#000c11
+    hi Comment ctermbg=0 ctermfg=233
+    hi Comment guifg=#314c4c guibg=#000c0d
     hi CommentInline cterm=NONE gui=NONE
-    hi CommentInline ctermbg=0 ctermfg=234
-    hi CommentInline guifg=#55696a guibg=#000c11
+    hi CommentInline ctermbg=0 ctermfg=233
+    hi CommentInline guifg=#324c4b guibg=#000c0d
     hi CommentBlock cterm=NONE gui=NONE
-    hi CommentBlock ctermbg=0 ctermfg=234
-    hi CommentBlock guifg=#55696a guibg=#000c11
+    hi CommentBlock ctermbg=0 ctermfg=233
+    hi CommentBlock guifg=#324c4b guibg=#000c0d
     hi SpecialComment cterm=NONE gui=NONE
-    hi SpecialComment ctermbg=0 ctermfg=235
-    hi SpecialComment guifg=#49818d guibg=#000c11
+    hi SpecialComment ctermbg=0 ctermfg=234
+    hi SpecialComment guifg=#347d84 guibg=#000c0d
     hi Todo cterm=NONE gui=NONE
     hi Todo ctermbg=0 ctermfg=52
-    hi Todo guifg=#8be5fb guibg=#000c11
+    hi Todo guifg=#50cac7 guibg=#000c0d
     hi String cterm=NONE gui=NONE
     hi String ctermbg=0 ctermfg=52
-    hi String guifg=#c9d5ff guibg=#000c11
+    hi String guifg=#79c99a guibg=#000c0d
     hi Character cterm=NONE gui=NONE
     hi Character ctermbg=0 ctermfg=52
-    hi Character guifg=#d2d2ff guibg=#000c11
+    hi Character guifg=#81c893 guibg=#000c0d
     hi SpecialChar cterm=NONE gui=NONE
     hi SpecialChar ctermbg=0 ctermfg=52
-    hi SpecialChar guifg=#a3daff guibg=#000c11
+    hi SpecialChar guifg=#47cf98 guibg=#000c0d
     hi Number cterm=NONE gui=NONE
     hi Number ctermbg=0 ctermfg=52
-    hi Number guifg=#bde3a5 guibg=#000c11
+    hi Number guifg=#9bb8fc guibg=#000c0d
     hi Float cterm=NONE gui=NONE
     hi Float ctermbg=0 ctermfg=52
-    hi Float guifg=#b9e4a8 guibg=#000c11
+    hi Float guifg=#a2b6fc guibg=#000c0d
     hi Boolean cterm=NONE gui=NONE
     hi Boolean ctermbg=0 ctermfg=52
-    hi Boolean guifg=#bae3a7 guibg=#000c11
+    hi Boolean guifg=#9fb7fc guibg=#000c0d
     hi Constant cterm=NONE gui=NONE
     hi Constant ctermbg=0 ctermfg=52
-    hi Constant guifg=#cbdeb4 guibg=#000c11
+    hi Constant guifg=#acb7e3 guibg=#000c0d
     hi Identifier cterm=NONE gui=NONE
     hi Identifier ctermbg=0 ctermfg=52
-    hi Identifier guifg=#ffb6d5 guibg=#000c11
+    hi Identifier guifg=#bebd6a guibg=#000c0d
     hi Function cterm=NONE gui=NONE
     hi Function ctermbg=0 ctermfg=52
-    hi Function guifg=#ffb6d5 guibg=#000c11
+    hi Function guifg=#bebd6a guibg=#000c0d
     hi Statement cterm=NONE gui=NONE
     hi Statement ctermbg=0 ctermfg=52
-    hi Statement guifg=#96e8cd guibg=#000c11
+    hi Statement guifg=#dca5ee guibg=#000c0d
     hi Conditional cterm=NONE gui=NONE
     hi Conditional ctermbg=0 ctermfg=52
-    hi Conditional guifg=#97e8cb guibg=#000c11
+    hi Conditional guifg=#d9a6ef guibg=#000c0d
     hi Repeat cterm=NONE gui=NONE
     hi Repeat ctermbg=0 ctermfg=52
-    hi Repeat guifg=#94e8cf guibg=#000c11
+    hi Repeat guifg=#dea4ec guibg=#000c0d
     hi Label cterm=NONE gui=NONE
     hi Label ctermbg=0 ctermfg=52
-    hi Label guifg=#98e8cb guibg=#000c11
+    hi Label guifg=#dfa4ec guibg=#000c0d
     hi Operator cterm=NONE gui=NONE
     hi Operator ctermbg=0 ctermfg=52
-    hi Operator guifg=#94e8d0 guibg=#000c11
+    hi Operator guifg=#d8a6ef guibg=#000c0d
     hi Keyword cterm=NONE gui=NONE
     hi Keyword ctermbg=0 ctermfg=52
-    hi Keyword guifg=#98e8ca guibg=#000c11
+    hi Keyword guifg=#dfa4ec guibg=#000c0d
     hi PreProc cterm=NONE gui=NONE
     hi PreProc ctermbg=0 ctermfg=52
-    hi PreProc guifg=#ffc0fe guibg=#000c11
+    hi PreProc guifg=#9bb8fc guibg=#000c0d
     hi Include cterm=NONE gui=NONE
     hi Include ctermbg=0 ctermfg=52
-    hi Include guifg=#ffc0fd guibg=#000c11
+    hi Include guifg=#98b9fc guibg=#000c0d
     hi Define cterm=NONE gui=NONE
     hi Define ctermbg=0 ctermfg=52
-    hi Define guifg=#ffc1ff guibg=#000c11
+    hi Define guifg=#98b9fc guibg=#000c0d
     hi Macro cterm=NONE gui=NONE
     hi Macro ctermbg=0 ctermfg=52
-    hi Macro guifg=#ffc1ff guibg=#000c11
+    hi Macro guifg=#9fb7fc guibg=#000c0d
     hi PreCondit cterm=NONE gui=NONE
     hi PreCondit ctermbg=0 ctermfg=52
-    hi PreCondit guifg=#ffc1ff guibg=#000c11
+    hi PreCondit guifg=#97b9fc guibg=#000c0d
     hi Type cterm=NONE gui=NONE
-    hi Type ctermbg=0 ctermfg=52
-    hi Type guifg=#ffb6bc guibg=#000c11
+    hi Type ctermbg=0 ctermfg=238
+    hi Type guifg=#ff968d guibg=#000c0d
     hi StorageClass cterm=NONE gui=NONE
-    hi StorageClass ctermbg=0 ctermfg=52
-    hi StorageClass guifg=#ffb6ba guibg=#000c11
+    hi StorageClass ctermbg=0 ctermfg=238
+    hi StorageClass guifg=#ff968e guibg=#000c0d
     hi Structure cterm=NONE gui=NONE
-    hi Structure ctermbg=0 ctermfg=52
-    hi Structure guifg=#ffb6ba guibg=#000c11
+    hi Structure ctermbg=0 ctermfg=238
+    hi Structure guifg=#ff968f guibg=#000c0d
     hi Typedef cterm=NONE gui=NONE
-    hi Typedef ctermbg=0 ctermfg=52
-    hi Typedef guifg=#ffb6be guibg=#000c11
+    hi Typedef ctermbg=0 ctermfg=238
+    hi Typedef guifg=#ff968f guibg=#000c0d
     hi Delimiter cterm=NONE gui=NONE
     hi Delimiter ctermbg=0 ctermfg=234
-    hi Delimiter guifg=#656374 guibg=#000c11
+    hi Delimiter guifg=#613d47 guibg=#000c0d
     hi Debug cterm=NONE gui=NONE
-    hi Debug ctermbg=0 ctermfg=53
-    hi Debug guifg=#fbd456 guibg=#001b26
+    hi Debug ctermbg=0 ctermfg=52
+    hi Debug guifg=#00cfff guibg=#001c1e
     hi Error cterm=NONE gui=NONE
-    hi Error ctermbg=0 ctermfg=53
-    hi Error guifg=#fdd455 guibg=#001b26
+    hi Error ctermbg=0 ctermfg=52
+    hi Error guifg=#00cfff guibg=#001c1e
     hi LineNR cterm=NONE gui=NONE
     hi LineNR ctermbg=0 ctermfg=235
-    hi LineNR guifg=#6b7c80 guibg=#0a0808
+    hi LineNR guifg=#607775 guibg=#0a0808
     hi Visual cterm=NONE gui=NONE
-    hi Visual ctermbg=234 ctermfg=52
-    hi Visual guifg=#96ffff guibg=#326d79
+    hi Visual ctermbg=233 ctermfg=52
+    hi Visual guifg=#5affff guibg=#005151
   endif
 else
   if &background == "light"
