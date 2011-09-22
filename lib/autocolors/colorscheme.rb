@@ -25,7 +25,7 @@ module AutoColors
       # hues overall end up in the colorscheme
       @colorfulness = nrand(0.6,  0.4,  0.3,  1.0)
 
-      @intensity = rand_seq(0.0, 110.0, 8, @contrast)
+      @intensity = rand_seq(0.0, 1.0, 8, @contrast).map{|i| simplelogit(i) * 105}
       @fcolor = (0..7).map {|i| i.to_f / 7.0 * 100.0 * Math.sqrt(2.0) * @chromacity }
 
       hues = rand_seq(0.0, 1.0, 10, @colorfulness).shuffle
@@ -179,10 +179,11 @@ module AutoColors
       max = max.to_f; min = min.to_f; contraction = contraction.to_f
       spread = max - min
       base_step = spread / (points.to_f - 1.0) * contraction
+      partial = base_step / 3.0
       curr = 0.0
       res = [curr]
       while res.size < points
-        curr += nrand(base_step, base_step / 2.0, base_step / 3.0, base_step * 3.0)
+        curr += nrand(base_step, partial / 2.0, base_step - (partial), base_step + (partial))
         res << curr
       end
       if curr > spread
@@ -193,6 +194,11 @@ module AutoColors
         res.map!{|v| offset + v}
       end
       return res.map{|v| v + min}
+    end
+
+    # (inverse s-curve, steepest on edges)
+    def simplelogit(x)
+      [[Math.log(x.to_f / (1.0 - x.to_f), Math::E ** 4.5)+0.5,0.0].max,1.0].min
     end
   end
 end
