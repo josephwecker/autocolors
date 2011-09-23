@@ -204,7 +204,7 @@ namespace :samples do
     end
     File.open('tmp_i.vim','w+'){|f| f.write(instructions.join("\n"))}
     cmd = "gvim -i NONE -f -n -g -b -N --noplugin " +
-          "--cmd 'set runtimepath+=../../.samples/vim/' " +
+          "--cmd 'set runtimepath+=../../.samples/vim/' --cmd 'set modelines=0' --cmd 'set nomodeline' " +
           "-u '#{vimrc}' -S tmp_i.vim -c qa!"
     $stderr.puts cmd
     `#{cmd}`
