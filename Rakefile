@@ -120,7 +120,7 @@ namespace :samples do
         search_paths << "'./#{user}/#{repo}'"
       end
       extensions.each do |ext|
-        cmd = "find -x -f #{search_paths.join(' ')} -iregex '.*\\.#{ext}' -type f -size 4"
+        cmd = "find #{search_paths.join(' ')} -iregex '.*\\.#{ext}' -type f -size 4"
         candidate_files = `#{cmd}`.split("\n").map{|fn|fn.strip}
         randf = candidate_files[rand(candidate_files.size)]
         unless randf.nil? or randf == ''
