@@ -16,7 +16,7 @@
 | text.output                | <' | <   | <   | <  | <   | <   | N      | TextOutput       | markup.output *                    | go              | ?
 
 
-| comment                    | 1' | -   | --  | 1  | --- | --  | I'     | Comment          | comment                            | c               | comment-face
+| comment                    | 1' | ~   | -   | 1  | --- | --  | I'     | Comment          | comment                            | c               | comment-face
 | comment.inline             | <' | <   | <   | <  | <   | <   | I'     | CommentInline    | comment.line                       | c1              | ?
 | comment.multiline          | <' | <   | <   | <  | <   | <   | I'     | CommentBlock     | comment.block                      | cm              | ?
 | comment.special            | <' | <+  | <+  | <  | <   | <   | I'B'   | SpecialComment   | comment.block.documentation        | cs              | ?
