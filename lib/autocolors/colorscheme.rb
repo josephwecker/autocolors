@@ -198,7 +198,9 @@ module AutoColors
 
     # (inverse s-curve, steepest on edges)
     def simplelogit(x)
-      [[Math.log(x.to_f / (1.0 - x.to_f), Math::E ** 4.5)+0.5,0.0].max,1.0].min
+      return 0.0 if x <= 0.0
+      return 1.0 if x >= 1.0
+      [[Math.log(x.to_f / (1.0 - x.to_f)) / Math.log(Math::E ** 4.5) + 0.5,0.0].max,1.0].min
     end
   end
 end
