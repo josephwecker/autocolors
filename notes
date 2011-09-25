@@ -6,7 +6,8 @@ common approaches:
  - syntactic distance
 
 
- - author vs. maintainer vs. reviewer vs. contributor ...
+ - author vs. maintainer vs. reviewer vs. contributor ... [better groups below
+   familiarity times activity]
  - density / levels of distinction / 
  - structural vs. contextual (likelihood that, for example, you'll find it at the
    beginning of a line with aligned indentation)
@@ -16,7 +17,7 @@ common approaches:
 static function blahblah
 ^      ^        ^
 |      |        +- discriminant
-|      +---------- structural
+|      +---------- structural (nix - call it plumbing or attribute below)
 +----------------- qualifier/attribute
 
 
@@ -306,4 +307,190 @@ a hilight-section for each of t_Co in 8 / 16 / 88 / 256 / gui
 hi Normal / and then
 hi MainPart   term=... cterm=... gui=...    ctermfg=... ctermbg=... guifg=... guibg=...
 
+
+
+
+
+
+---------------------------- TRY 3 ---------------------------------
+
+create monotone bases
++----------+---------------------+-------------------+
+| name     | light-scheme        | dark-scheme       |
++----------+---------------------+-------------------+
+| light_3  | background          |                   |-\
+| light_2  | background-emph     |                   |  |
+| light_1  | content-minor       | content-emph      |  |-----
+| light_0  |                     | content           |--|\
+| dark__0  | content             |                   |-/  |
+| dark__1  | content-emph        | content-minor     |    |---
+| dark__2  |                     | background-emph   |    |
+| dark__3  |                     | background        |---/
+
+
+keyword perspective
+syntactical perspective
+
+
+composition
+===========
+Mosly from http://www.etsimo.uniovi.es/hypgraph/design/composition/composition_main_page.htm
+
+Unity / Harmony
+---------------
+* The mind tends to group objects that are close together into larger objects.
+  Especially if they share more attributes: size, shape, color, or value.
+* Negative spaces also grouped.
+* Interrupted objects perceived as if they were whole - mind fills in the gaps
+  so it's familiar in other contexts.
+
+Methods of Emphasis
+--------------------
+* Through contrast
+* Through tangents / different angle
+* Through isolation
+* Through drawing the eye to it w/ angles (see under balance)
+* Through shape
+* Through recognition
+* Through motion
+
+
+Balance
+--------------
+* Contrast: every high contrast item balanced by larger spaces of lower contrast
+* Color: small amount of high color balances larger area of dull color. Adjacent
+  complimentary colors weigh more than adjacent similar colors
+* Shape & texture: small complicated shape can balance a large simple shape. Large
+uncluttered area can balance small busy area. Complex areas can be put in
+shadows, big simple shapes can be enhanced w/ bright lighting or broken up with
+complex shadows / textures.
+* Position: a small object further from the center balances a larger object
+closer to the center.
+* Balance by direction: Balance heavier side by having edges converging toward
+lighter side to draw the eye in that direction. Also same color on opposite
+sides can make the eye travel over.
+* Perceived physical weight: "heavier" objects are more visually interesting than
+lighter objects of the same size. - heaviness can be simulated by relative
+density / whitespace rhythm within the object/group.
+
+* Colors and visual weight:
+  - Hues
+    1. Red
+    2. Blue (possibly tied w/ #1 when all else is equal)
+    3. Green
+    4. Orange
+    5. Yellows
+  - Dark heavier than light
+  - Saturated heavier than unsaturated
+
+Scale and Proportion
+-----------------------
+* (Scale = overall size, proportion = relative size)
+* Larger perceived as closer. Out of scale/proportion perceived heavily. Both
+  perceived as more important.
+* Centered has little weight/importance. Thirds and golden ratio tend to create
+  interest / importance w/o over-emphasizing.
+* Golden ratio (etc.) good for position, shadows, etc.
+
+
+Repetition and Rhythm
+----------------------
+(see also unity/harmony - repetition "groups" things - gestalt)
+* Same shape leads eye from one to the next - even if across the image
+* Shape can obtain more visual weight by repetition - such as by its shadow.
+
+Rythm - repetition of groups that are perceived as different but related -
+usually by adding another attribute that is changing - so that they vary.
+Curvilinear rhythms can calm and angular lines can stimulate.
+
+Line and Contour
+-----------------
+1. Actual line
+2. Implied line
+3. Psychic line (mental connection between elements) (such as eyeline)
+
+Lines that lead to a visual object but don't reach it create tension (which
+increases importance)
+
+Horizontal lines imply stability,
+Vertical lines imply motion,
+Diagonal lines imply motion and depth.
+
+Careful placement of lights can help create the lines you want in shadows.
+
+
+
+
+
+
+GOAL: Maximize global balance and "interestingness" at the same time.
+  (possibly not as measurable) : Convey the most information possible as
+  quickly as possible.
+
+
+[ASIDE - _what_ information would it be possible to convey?]
+   Usual
+    - syntactic role of groups of symbols
+    - builtin name vs. other names
+    - basic idea of the literal/constant type that the compiler/interpreter is
+      going to treat text as. (i.e., whoops, forgot the end-quote on my string)
+   Not-unheard-of
+    - stylistic concerns
+    - reek / roodi like analysis results
+   Unusual
+    - lint-like analysis results
+    - builtin name vs. other names vs. names defined in that module vs. names
+      defined just above vs. my own name (like in recursion)
+    - type held in variable
+
+
+
+CONTEXTUAL EMPHASIS
+--------------------
+  (possibly different list of emphasis points depending on-
+    - familiarity w/ code (how much you contributed, how many times you've seen
+      it, how much you've used it in an external context like calls into it)
+      [would, for example, determine how important comments are...]
+    - activity:
+      * understanding
+      * searching
+      * iterating (adding/subtracting/bug-fixing/...)
+      * running (stepping / debugging / runtime exception handling,
+        stacktraces...) (things that might be most important: author,
+	last-updated, error seen before ...)
+    - code-state:
+      * actively edited (in which case you may not want to see
+        trailing-whitespace errors, for example)
+      * age / number of times open/modified here (just like familiarity, but as
+        an indicator of the possible state of the code instead of the possible
+	familiarity of the user).
+
+
+HIGHLIGHT GROUPS
+-----------------------
+ Highlight group types:
+  * Plumbing - symbols to remove syntactical ambiguities, imports/etc. that are
+    used just to pull together the right dependencies but are too general to
+    give any meaningful insight into the code that follows (esp. if you can
+    require something and then not use it - potentially completely irrelevant
+    then to most activites/familiarities)
+  * Syntactic discriminators - misc. syntactical symbols that are actually
+    important- implied a size/density disproportionate to importance, unlike
+    plumbing.
+  * Control-flow
+    - Domination heirarchy
+    - Reachability
+    - Run/branch-probability
+  * Data-flow.  (?) Possibly redundant w/ or subject to discriminators (showing
+    types etc.) and syntactic discriminators (showing actual transfer of data
+    such as the assignment, dereferencing, or.
+  * Descriptive / Attributive
+  * Discriminators (keywords etc. - syntactically identical but semantically
+    infinitely variable).
+   - Geneological Groups: builtin vs. external library vs. internal module vs.
+     defined in this file vs. recursive in current context, etc.
+   - Utilitarian Semantic Groups: could naively by different 'modules' - but
+     "web-related", vs. "math-related" vs. "framework-related" etc.
+   - Data-flow groups: distinguished by the datatype it's infered to be holding
+     at that moment, possibility of null, ...
 
