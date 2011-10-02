@@ -53,6 +53,26 @@ module AutoColors
     def hue;    rad2turns(Math.atan2(ca, cb))                 end
     def chroma; Math::sqrt((ca * ca) + (cb * cb))             end
 
+    def hue_index=(v)
+      self.hue = [
+        0.0,     # 0  | Blue
+        0.15,    # 1  | Cyan
+        0.225,   # 2  | Teal
+        0.33,    # 3  | Green
+        0.4,     # 4  | Forest green
+        0.45,    # 5  | Puke green
+        0.5,     # 6  | Yellow
+        0.565,   # 7  | Orange
+        0.625,   # 8  | Orange-red
+        0.6575,  # 9  | Red
+        0.75,    # 10 | Magenta
+        0.825,   # 11 | Fuchsia
+        0.8875,  # 12 | Pink
+        0.925,   # 13 | Violet
+        0.95     # 14 | Indigo
+      ][v.to_i]
+    end
+
     def hue=(v)
       r = turns2rad(v.to_f)
       c = chroma
