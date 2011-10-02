@@ -1,3 +1,14 @@
+## RELOADED ##
+
+- [ ] Analyser for highlight group statistics
+
+- [ ] Fitness criteria defined and designed, local and global
+
+- [ ] 
+
+
+-----------------------------------
+
 ## Urgent ##
 - [ ] Fix color spread variety (gets too close on deep syntax elements- not enough variety)
 - [ ] Fix translation to 256-colorspace
