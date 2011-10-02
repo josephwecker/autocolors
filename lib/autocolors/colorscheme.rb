@@ -26,11 +26,12 @@ module AutoColors
       @colorfulness = nrand(0.8,  0.4,  0.5,  1.0)
 
       @intensity = rand_seq(0.0, 1.0, 8, @contrast).map{|i| simplelogit(i) * 105}
-      @fcolor = (0..7).map {|i| i.to_f / 7.0 * 100.0 * Math.sqrt(2.0) * @chromacity }
+      @fcolor = rand_seq(0.0,100.0*Math.sqrt(2.0)*@chromacity,8)
+      #@fcolor = (0..7).map {|i| i.to_f / 7.0 * 100.0 * Math.sqrt(2.0) * @chromacity }
 
       hues = rand_seq(0.0, 1.0, 10, @colorfulness).shuffle
       @base_colors = hues.map do |h|
-        c = Color.new([50, 10, 10])
+        c = Color.new([50, 60, 60])
         c.hue = h
         [c.ca, c.cb, 1]
       end
@@ -60,7 +61,7 @@ module AutoColors
         ddat = entry.data.dup
         fg_a, fg_b, _ = @base_colors[ldat[:fg_idx]]
         bg_a, bg_b, _ = @base_colors[ldat[:bg_idx]]
-        ldat[:fg] = lab(light_i(ldat[:fg_intensity]-1), light_s(ldat[:fg_saturation]+1), fg_a, fg_b)
+        ldat[:fg] = lab(light_i(ldat[:fg_intensity]+1), light_s(ldat[:fg_saturation]+2), fg_a, fg_b)
         ldat[:bg] = lab(light_i(ldat[:bg_intensity]), light_s(ldat[:bg_saturation]), bg_a, bg_b, false)
         ddat[:fg] = lab( dark_i(ldat[:fg_intensity]),  dark_s(ldat[:fg_saturation]), fg_a, fg_b)
         ddat[:bg] = lab( dark_i(ldat[:bg_intensity]),  dark_s(ldat[:bg_saturation]), bg_a, bg_b, false)
@@ -120,7 +121,7 @@ module AutoColors
     def dark_s(idx)  @fcolor[idx]        end
     def light_s(idx) @fcolor[[idx,7].min]        end
   
-    def lab(intensity, chroma, a, b, rand_adjust=false)
+    def lab(intensity, chroma, a, b, rand_adjust=true)
       ivar = rand_adjust ? (@colorfulness * rand * 16) - 8 : 0
       c = Color.new([[[intensity + ivar,0].max,140].min, a, b])
       c.chroma = chroma
@@ -136,12 +137,17 @@ module AutoColors
       depth = depth.to_f            # Usually 1, less frequently 2, 3, to 5...
       count = count.to_f            # How many others already based off of the same parent
       direction = rand(2) == 1 ? -1.0 : 1.0
-      maxdiff = @colorfulness * (1.0 / @base_colors.size) * 1.5 # allocated roughly per major color group
-      cdiff = direction * maxdiff / (depth+0.5) * count * 2.5 * diff_level
-      cdiff += current_hue
-      cdiff = 1.0 + cdiff if cdiff < 0.0
-      cdiff = cdiff - 1.0 if cdiff > 1.0
-      c.hue = cdiff
+
+      maxdiff = 1.0 / @base_colors.size  # allocated roughly per major color group
+      dist = diff_level * count * direction * maxdiff / ((depth + 1.0) / 6.0)
+
+      #cdiff = direction * maxdiff / (depth+0.5) * count * 2.5 * diff_level
+      #cdiff += current_hue
+
+      # Rotate it
+      dist = 1.0 + dist if dist < 0.0
+      dist = dist - 1.0 if dist > 1.0
+      c.hue = dist + current_hue
       new_idx = @base_colors.size
       @base_colors[new_idx] = [c.ca, c.cb, 1]
       @base_colors[base_idx][2] += 1
