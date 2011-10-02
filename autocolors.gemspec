@@ -4,15 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{autocolors}
-  s.version = "0.0.6"
+  s.name = "autocolors"
+  s.version = "0.0.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Joseph Wecker"]
-  s.date = %q{2011-09-23}
-  s.default_executable = %q{autocolors}
-  s.description = %q{Inspired by solarized, and lots of work with various colorschemes and syntax highlight files, and driven by a need to have some color variety that doesn't stink. Tries to generate colorschemes with just the right contrast, variety, and coherence.}
-  s.email = %q{joseph.wecker@gmail.com}
+  s.date = "2011-10-02"
+  s.description = "Inspired by solarized, and lots of work with various colorschemes and syntax highlight files, and driven by a need to have some color variety that doesn't stink. Tries to generate colorschemes with just the right contrast, variety, and coherence."
+  s.email = "joseph.wecker@gmail.com"
   s.executables = ["autocolors"]
   s.extra_rdoc_files = [
     "LICENSE.txt",
@@ -67,6 +66,7 @@ Gem::Specification.new do |s|
     "Gemfile",
     "Gemfile.lock",
     "LICENSE.txt",
+    "NOTES.md",
     "README.md",
     "Rakefile",
     "TODO.md",
@@ -80,6 +80,7 @@ Gem::Specification.new do |s|
     "analysis/vim/statements.list",
     "autocolors.gemspec",
     "bin/autocolors",
+    "fitness.md",
     "lib/VERSION",
     "lib/autocolors.rb",
     "lib/autocolors/color.rb",
@@ -87,7 +88,6 @@ Gem::Specification.new do |s|
     "lib/autocolors/mapping.rb",
     "lib/autocolors/mapping.udon",
     "lib/autocolors/templates/colorscheme.erb.vim",
-    "notes",
     "quicktest.html",
     "quicktest_old.html",
     "quicktest_old2.html",
@@ -96,11 +96,11 @@ Gem::Specification.new do |s|
     "test/swatch.erb",
     "test/test_autocolors.rb"
   ]
-  s.homepage = %q{http://github.com/josephwecker/autocolors}
+  s.homepage = "http://github.com/josephwecker/autocolors"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.2}
-  s.summary = %q{Automatically generates colorschemes (mostly for editors).}
+  s.rubygems_version = "1.8.10"
+  s.summary = "Automatically generates colorschemes (mostly for editors)."
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
